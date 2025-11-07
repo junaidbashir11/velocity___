@@ -53,7 +53,7 @@ export default function DynamicEndpointLinkerComponent() {
 
 
   async function checkendpoints() {
-    const request = await fetch("http://localhost:8001/checkdynamicendpoints", {
+    const request = await fetch("https://itsvelocity-velocity.hf.space/checkdynamicendpoints", {
       mode: "cors",
       method: "post",
       body: JSON.stringify({ owner: publicKey?.toBase58() }),
@@ -77,7 +77,7 @@ export default function DynamicEndpointLinkerComponent() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, tag: string) => {
     e.preventDefault();
-    const request = await fetch("http://localhost:8001/update_dynamic_endpoint", {
+    const request = await fetch("https://itsvelocity-velocity.hf.space/update_dynamic_endpoint", {
       mode: "cors",
       method: "post",
       body: JSON.stringify({
@@ -103,7 +103,7 @@ export default function DynamicEndpointLinkerComponent() {
 
     e.preventDefault();
     setLoading(true);
-    const request = await fetch("http://localhost:8001/delete_dynamic_endpoint", {
+    const request = await fetch("https://itsvelocity-velocity.hf.space/delete_dynamic_endpoint", {
       mode: "cors",
       method: "post",
       body: JSON.stringify({

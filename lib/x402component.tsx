@@ -52,7 +52,7 @@ export default function EndpointComponent() {
     try {
       
       setLoading(true);
-      const res = await fetch("http://localhost:8001/register_endpoint", {
+      const res = await fetch("https://itsvelocity-velocity.hf.space/register_endpoint", {
         method: "POST",
         mode: "cors",
         body:JSON.stringify({

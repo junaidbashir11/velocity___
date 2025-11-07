@@ -77,7 +77,7 @@ export default function DynamicEndpointCreationComponent() {
     try {
       
 
-      const res = await fetch("http://localhost:8001/register_dynamic_endpoint", {
+      const res = await fetch("https://itsvelocity-velocity.hf.space/register_dynamic_endpoint", {
         method: "POST",
         mode: "cors",
         body:JSON.stringify({

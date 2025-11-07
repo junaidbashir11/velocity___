@@ -18,7 +18,7 @@ export default function EndpointLinkerComponent() {
   const [loading,setLoading]=useState(false);
 
    async function checkendpoints() {
-      let request = await fetch("http://localhost:8001/checkendpoints", {
+      let request = await fetch("https://itsvelocity-velocity.hf.space/checkendpoints", {
         mode: "cors",
         method: "post",
         body: JSON.stringify({
@@ -41,7 +41,7 @@ export default function EndpointLinkerComponent() {
 
     setLoading(true);
     e.preventDefault();
-    let request=await fetch("http://localhost:8001/delete_endpoint",{
+    let request=await fetch("https://itsvelocity-velocity.hf.space/delete_endpoint",{
       method:"post",
       mode:"cors",
       body:JSON.stringify({
