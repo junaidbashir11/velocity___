@@ -17,6 +17,7 @@ import {
 
 
 import { Spinner } from "@/components/ui/spinner"
+import { request } from "http";
 
 
 export default function EndpointComponent() {
@@ -73,7 +74,14 @@ export default function EndpointComponent() {
 
       if (!res.ok) throw new Error("Upload failed");
 
-      
+      const response=await res.json()
+      if (response.message=="endpoint already present"){
+        
+        toast.success(`the endpoint ${formValues.endpoint} is already registered`)
+        setLoading(false);
+      }
+      else {
+
 
         
         toast.success(`your endpoint ${formValues.endpoint} is registered`)
@@ -86,6 +94,7 @@ export default function EndpointComponent() {
             price: '',
         });
        
+      }
 
     } catch (err) {
       console.error(err);

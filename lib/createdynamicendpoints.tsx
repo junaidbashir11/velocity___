@@ -45,7 +45,7 @@ export default function DynamicEndpointCreationComponent() {
     async function checkToken(){
 
 
-    let tokenstatus=await TokenGATING(publicKey?.toBase58());
+    const tokenstatus=await TokenGATING(publicKey?.toBase58());
     if (tokenstatus==true){
       hasToken(true)
     }
@@ -98,6 +98,13 @@ export default function DynamicEndpointCreationComponent() {
 
       if (!res.ok) throw new Error("Upload failed");
 
+      const response=await res.json()
+      if (response.message=="endpoint already present"){
+          toast.success(`the endpoint ${formValues.endpoint} is already registered`)
+          setLoading(false);
+      }
+      else {
+
       
         toast.success(`your dynamic  endpoint ${formValues.endpoint} is registered`)
         setLoading(false);
@@ -109,7 +116,7 @@ export default function DynamicEndpointCreationComponent() {
             price:''
         });
        
-
+      }
     } catch (err) {
       console.error(err);
     

@@ -41,7 +41,7 @@ export default function HomeComponent() {
       headers: { "content-type": "application/json" },
     });
     const data = await res.json();
-    let datasize = data.invoices?.length || 0;
+    const datasize = data.invoices?.length || 0;
     setInvoiceCount(datasize);
   }
 

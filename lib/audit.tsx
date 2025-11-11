@@ -86,7 +86,7 @@ export default function AuditComponent() {
             <section className="divide-y divide-gray-700">
               {invoices.map((item) => (
                 <motion.div
-                  key={item.endpoint_linker}
+                  key={item.signature}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}

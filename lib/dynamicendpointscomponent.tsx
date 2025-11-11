@@ -49,7 +49,7 @@ export default function DynamicEndpointLinkerComponent() {
   useEffect(() => {
     if (!isGateEnabled) return;
     async function checkToken() {
-      let tokenstatus = await TokenGATING(publicKey?.toBase58());
+      const tokenstatus = await TokenGATING(publicKey?.toBase58());
       if (tokenstatus === true) hasToken(true);
     }
     checkToken();

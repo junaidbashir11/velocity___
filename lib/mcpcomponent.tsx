@@ -21,7 +21,7 @@ export default function MCP() {
           no wrappers, no SDKs, just instant context access.
         </p>
 
-        {/* Card */}
+        
         <div className="mt-12 bg-[#0f172a]/60 border border-[#1e293b] backdrop-blur-md shadow-2xl rounded-2xl p-6 md:p-10 text-left">
           <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">
             🚀 Auto-Exposed MCP Endpoints
@@ -40,7 +40,7 @@ export default function MCP() {
           </p>
         </div>
 
-        {/* Code Example */}
+      
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,11 +56,11 @@ const mcp = await connect({
   server: "https://mcpv100-production.up.railway.app/mcp",
 });
 
-// List available tools
+
 const tools = await mcp.listTools();
 console.log("Available tools:", tools);
 
-// Invoke one of them
+
 const res = await mcp.invoke("get-data-from-resource-server_by_get_method", {
   ownerwallet: "devs wallet address who registered the endpoint",
   endpoint: "/api/{yourtaghere}",
@@ -68,7 +68,7 @@ const res = await mcp.invoke("get-data-from-resource-server_by_get_method", {
 });
 
 console.log("MCP Response:", res);
-
+This example covers GET based endpoints
 
 `}
           </pre>
