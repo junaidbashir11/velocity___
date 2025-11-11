@@ -57,9 +57,14 @@ export default function HomeComponent() {
     <div className="px-10 py-10 text-gray-200 bg-gray-900 min-h-screen">
       {/* Hero Section */}
       <div className="text-center mb-10">
-        <h1 className="text-3xl sm:text-5xl font-extrabold mb-4 bg-gray-600 bg-clip-text text-transparent">
-          Instantly x402, Dynamic x402 & MCP Your API Endpoints
-        </h1>
+        
+
+          <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
+              <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
+                Instantly x402, Dynamic x402 & MCP Your API Endpoints
+              </span>
+            </h1>
+
         <p className="text-gray-400 max-w-2xl mx-auto">
           Accelerate, manage, and dynamically  monetize your public API endpoints effortlessly with our advanced platform.
         </p>

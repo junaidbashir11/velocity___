@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import dynamic from 'next/dynamic';
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -94,6 +93,8 @@ export default function Home() {
               CA: {process.env.NEXT_PUBLIC_CA}
             </span>
           </motion.div>
+
+          <WalletButton />
         </div>
       </nav>
 
@@ -128,8 +129,40 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative mb-12"
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-3xl blur-2xl opacity-30"></div>
-           
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-3xl blur-2xl opacity-30">
+            </div>
+
+ 
+
+        <div className="flex justify-center w-full py-8">
+  {/* The container centers the entire image block */}
+  <div className="w-full px-4">
+    <Image
+      src="/newp.png"
+      alt="A placeholder graphic"
+      
+      // 1. Satisfy Next.js by setting large dimensions
+      width={1600} 
+      height={400} 
+      
+      // 2. Use Tailwind to enforce visual sizing and centering
+      className="
+        block           /* Forces it to be a block element */ /* Centers the image horizontally */
+        w-full          /* Takes 100% of the parent container's width */
+        max-w-20xl       /* Keeps it wide (e.g., up to 6xl width) */
+        h-300          /* Enforces a short visual height */
+        object-cover    /* Ensures the image fills the short container */
+        rounded-xl
+        shadow-2xl
+      "
+    />
+  </div>
+</div>
+
+
+
+
+ 
           </motion.div>
           
           <motion.div 
@@ -138,10 +171,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            <section className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white px-10 py-6 text-lg rounded-2xl shadow-2xl shadow-purple-500/30 font-bold group transition-all">
-               <WalletButton />
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </section>
+           
            
           </motion.div>
         </div>
