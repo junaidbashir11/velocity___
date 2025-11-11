@@ -31,7 +31,7 @@ export default function MCP() {
           </p>
 
           <div className="bg-[#111827] border border-[#1e293b] rounded-lg p-3 font-mono text-sm text-green-400 mb-6">
-            https://mcpv100-production.up.railway.app/mcp     [staging phase]
+            https://mcpv100-production.up.railway.app/mcp     staging phase
           </div>
 
           <p className="text-gray-400 leading-relaxed">
@@ -47,9 +47,11 @@ export default function MCP() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="mt-10 bg-[#0a1120]/70 border border-[#1e293b] rounded-xl shadow-xl p-5 md:p-7 text-left"
         >
-          <p className="text-purple-400 mb-3 font-mono">// Example: Using an x402 MCP endpoint with Claude SDK</p>
+          
           <pre className="overflow-x-auto text-xs md:text-sm text-gray-300 font-mono">
 {`
+
+Example: Using an x402 MCP endpoint with Claude SDK
 import { connect } from "@anthropic-ai/mcp-sdk";
 
 const mcp = await connect({
