@@ -9,13 +9,6 @@ export default function Roadmap() {
       iconBg: "bg-purple-600/20",
       status: "Planned",
     },
-    {
-      title: "Client Library",
-      description: "Automated client library so you don’t have to manually set x-wallet or hit /api",
-      icon: <Package className="w-5 h-5 text-blue-400" />,
-      iconBg: "bg-blue-600/20",
-      status: "Planned",
-    },
      {
       title: "Builtin Testing",
       description: "Automated builtin testing for your endpoints",
@@ -39,10 +32,8 @@ export default function Roadmap() {
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 animate-pulse"></div>
 
       {/* Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
-
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-3xl space-y-12">
+     
+      <div className="relative z-10 w-full max-w-3xl space-y-10">
 
         <div className="space-y-6">
           {roadmapItems.map((item, idx) => (

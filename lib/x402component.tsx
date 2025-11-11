@@ -3,7 +3,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { Link,FileText, Globe } from 'lucide-react';
+import { Link,FileText, Globe,DollarSign } from 'lucide-react';
 
 import { toast } from "sonner"
 import { Toaster } from "sonner"
@@ -28,10 +28,12 @@ export default function EndpointComponent() {
 
   
   const [formValues, setFormValues] = useState({
+
         endpoint: '',
         description: '',
         meta: '',
-        amount: '',
+        price: '',
+
     });
 
 
@@ -60,7 +62,8 @@ export default function EndpointComponent() {
           owner:publicKey?.toBase58(),
           endpoint:formValues.endpoint,
           description:formValues.description,
-          meta:formValues.meta
+          meta:formValues.meta,
+          price:formValues.price
         }),
         "headers":{
           "content-type":"application/json"
@@ -80,7 +83,7 @@ export default function EndpointComponent() {
             endpoint: '',
             description: '',
             meta: '',
-            amount: '',
+            price: '',
         });
        
 
@@ -157,6 +160,25 @@ export default function EndpointComponent() {
               className="mt-1 w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all duration-200 text-slate-800 placeholder-slate-400"
             />
           </Field>
+
+           <Field>
+            <FieldLabel htmlFor="meta" className="text-slate-700 font-mono font-semibold text-sm uppercase tracking-wide">
+              
+              <DollarSign className="w-4 h-4" />
+              Price
+            </FieldLabel>
+            <Input
+              id="price"
+              name="price"
+              placeholder="Price"
+              onChange={handleChange}
+              required
+              className="mt-1 w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all duration-200 text-slate-800 placeholder-slate-400"
+            />
+          </Field>
+
+
+
          
         </FieldGroup>
       </FieldSet>

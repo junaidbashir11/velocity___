@@ -9,11 +9,15 @@ import {
   Play,
   Code,
   LockOpen,
+  Lock,
+  HomeIcon,
+  Martini
+  
 } from "lucide-react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import NavigationMenuD from "@/lib/navcomponent";
+
 
 import EndpointComponent from "@/lib/x402component";
 import EndpointLinkerComponent from "@/lib/endpointscomponent";
@@ -24,7 +28,24 @@ import Playground from "@/lib/playgroundcomponent";
 import Usage from "@/lib/usage";
 import Roadmap from "@/lib/roadmap";
 import X402Example from "@/lib/codecomponent";
-import About from "@/lib/aboutcomponent";
+import MCP from "@/lib/mcpcomponent";
+
+import Marketplace from "@/lib/marketplace";
+import HomeComponent from "@/lib/homecomponent";
+import AuditComponent from "@/lib/audit";
+
+
+
+import dynamic from "next/dynamic";
+
+const WalletButton = dynamic(
+  () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
+  { 
+    ssr: false,
+    loading: () => <div className="p-2 text-sm text-gray-400">Loading wallet...</div>,
+  }
+);
+
 
 export default function DashboardPage() {
   const { connected, publicKey } = useWallet();
@@ -32,30 +53,37 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!connected && !publicKey) {
+       localStorage.removeItem("loaded_wallet")
       router.push("/");
     }
+    else if (connected && publicKey){
+        localStorage.setItem("loaded_wallet",publicKey.toBase58())
+    }
+
   }, [connected, router, publicKey]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-gray-300">
       {/* Navbar */}
-
       <main className="max-w-7xl mx-auto px-6 py-10">
         {/* Tabs with Top Navigation */}
-        <Tabs defaultValue="about" className="w-full">
+        <Tabs defaultValue="home" className="w-full">
           {/* Top-centered Tabs */}
           <div className="flex justify-center">
             <TabsList className="flex justify-center bg-slate-900/80 backdrop-blur-md border border-slate-700/40 rounded-2xl px-3 py-2 shadow-lg">
               {[
-                { value: "about", label: "About", icon: Globe },
+
+                {value:"home",label:"Home",icon:HomeIcon},
+                { value: "mcp", label: "MCP", icon: Globe },
                 { value: "usage", label: "Usage", icon: Globe },
+                {value:"marketplace",label:"Marketplace",icon: Martini},
                 { value: "x402ify", label: "Register Endpoints", icon: List },
                 { value: "endpoints", label: "Endpoints", icon: List },
                 { value: "register_dynamic", label: "Dynamic Register", icon: Zap },
                 { value: "dynamicendpoints", label: "Dynamic Endpoints", icon: RefreshCw },
-                { value: "onetimepayable", label: "One Time Links", icon: LockOpen },
+                { value: "audit", label: "Audit", icon: LockOpen },
                 { value: "playground", label: "Playground", icon: Play },
-                { value: "client", label: "Client Integration", icon: Code },
+                { value: "profile", label: "Profile", icon: Code },
                 { value: "roadmap", label: "Roadmap", icon: Code },
               ].map((tab) => (
                 <TabsTrigger
@@ -81,12 +109,23 @@ export default function DashboardPage() {
 
           {/* Content Section */}
           <div className="mt-10 bg-slate-900/60 backdrop-blur-md border border-slate-800/50 rounded-2xl shadow-xl p-8">
-            <TabsContent value="about">
-              <About />
+           
+           
+            <TabsContent value="home">
+              <HomeComponent/>
+            </TabsContent>
+           
+           
+            <TabsContent value="mcp">
+              <MCP/>
             </TabsContent>
 
             <TabsContent value="usage">
               <Usage />
+            </TabsContent>
+
+             <TabsContent value="marketplace">
+              <Marketplace />
             </TabsContent>
 
             <TabsContent value="x402ify">
@@ -105,16 +144,16 @@ export default function DashboardPage() {
               <DynamicEndpointLinkerComponent />
             </TabsContent>
 
-            <TabsContent value="onetimepayable">
-              <OnetimeComponent />
+            <TabsContent value="audit">
+              <AuditComponent/>
             </TabsContent>
 
             <TabsContent value="playground">
               <Playground />
             </TabsContent>
 
-            <TabsContent value="client">
-              <X402Example />
+            <TabsContent value="profile">
+              <WalletButton/>
             </TabsContent>
 
             <TabsContent value="roadmap">

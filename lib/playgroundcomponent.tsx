@@ -50,7 +50,7 @@ export default function Playground(){
     setLoading402(true);
     const startTime = performance.now();
     
-    let request = await fetch("https://swapi.dev/api/people/1/", {
+    const  request = await fetch("https://swapi.dev/api/people/1/", {
       method: "get",
       headers: {
         "content-type": "application/json"
@@ -58,7 +58,7 @@ export default function Playground(){
     });
     
     const endTime = performance.now();
-    let response = await request.json();
+    const  response = await request.json();
     
     if (response) {
       setno402(response.name);
@@ -89,7 +89,7 @@ export default function Playground(){
 
 
     
-    let request = await client.fetch("https://itsvelocity-velocity.hf.space/api/9fc57x402ify", {
+    const  request = await client.fetch("https://itsvelocity-velocity.hf.space/api/00ddax402", {
       method: "get",
       mode:"cors",
       headers: {
@@ -99,7 +99,7 @@ export default function Playground(){
     });
     
     const endTime = performance.now();
-    let response = await request.json();
+    const  response = await request.json();
     
     if (response) {
       setw402(response.name);
@@ -207,8 +207,8 @@ export default function Playground(){
             
             <div className="relative p-6 space-y-4">
               <div className="bg-slate-800/50 rounded-lg p-4 border border-purple-500/20">
-                <p className="font-mono text-xs text-gray-500 mb-1">ENDPOINT</p>
-                <p className="font-mono text-sm text-purple-400 break-all">https://itsvelocity-velocity.hf.space/api/9fc57x402ify</p>
+                <p className="font-mono text-xs text-gray-500 mb-1">Using velocitysdk@1.0.0</p>
+                <p className="font-mono text-sm text-purple-400 break-all">Using velocitysdk@1.0.0</p>
               </div>
 
               {w402 && (

@@ -27,9 +27,17 @@ const features = [
     icon: RefreshCw,
     gradient: "from-blue-500 to-cyan-500"
   },
+
+   {
+    name: "MCP Capable",
+    description: "Registered endpoints are instanty MCP able and can be called by any MCP client",
+    icon: RefreshCw,
+    gradient: "from-blue-500 to-cyan-500"
+  },
+
   {
     name: "One Time Endpoints",
-    description: "Pay once for x402 powered endpoint for recurring customers",
+    description: "Pay once for x402 powered endpoint for recurring customers (coming soon)",
     icon: Zap,
     gradient: "from-pink-500 to-rose-500"
   },
@@ -110,7 +118,7 @@ export default function Home() {
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-              Instantly x402 your or any public API endpoints
+              Instantly x402, Dynamic x402 & MCP Your API Endpoints
             </p>
           </motion.div>
 
@@ -121,16 +129,7 @@ export default function Home() {
             className="relative mb-12"
           >
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-3xl blur-2xl opacity-30"></div>
-            <div className="relative bg-[#0f1535] rounded-3xl overflow-hidden border border-white/10">
-              <Image
-                src="/kol.png"
-                alt="about"
-                width={1920}
-                height={400}
-                className="w-full h-auto object-cover"
-                priority
-              />
-            </div>
+           
           </motion.div>
           
           <motion.div 
@@ -139,11 +138,11 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white px-10 py-6 text-lg rounded-2xl shadow-2xl shadow-purple-500/30 font-bold group transition-all">
-              Get Started
+            <section className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white px-10 py-6 text-lg rounded-2xl shadow-2xl shadow-purple-500/30 font-bold group transition-all">
+               <WalletButton />
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <WalletButton />
+            </section>
+           
           </motion.div>
         </div>
       </section>
