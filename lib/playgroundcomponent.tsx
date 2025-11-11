@@ -1,13 +1,11 @@
 
-// @ts-nocheck
-
 "use client";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react"
 import { Zap, Clock, CheckCircle } from 'lucide-react';
 import { useWallet} from "@solana/wallet-adapter-react";
-import { createX402Client } from 'x402-solana/client';
+import { createX402Client , type WalletAdapter} from 'x402-solana/client';
 import TokenGATING from "./tokengatingv2";
 import NoAccessCard from "./noaccess";
 import { useEffect } from "react";
@@ -30,12 +28,12 @@ export default function Playground(){
 
 
 
-   useEffect(()=>{
+  useEffect(()=>{
 
         if(!isGateEnabled) return ;
 
         async function checkToken(){
-        let tokenstatus=await TokenGATING(publicKey?.toBase58());
+        const  tokenstatus=await TokenGATING(publicKey?.toBase58());
         if (tokenstatus==true){
           hasToken(true)
         }
@@ -48,7 +46,7 @@ export default function Playground(){
 
   async function withoutx402(){
     setLoading402(true);
-    const startTime = performance.now();
+    //const startTime = performance.now();
     
     const  request = await fetch("https://swapi.dev/api/people/1/", {
       method: "get",
@@ -57,7 +55,7 @@ export default function Playground(){
       }
     });
     
-    const endTime = performance.now();
+    //const endTime = performance.now();
     const  response = await request.json();
     
     if (response) {
@@ -69,10 +67,14 @@ export default function Playground(){
 
   async function withx402(){
     setLoadingVelocity(true);
-    const startTime = performance.now();
+    //const startTime = performance.now();
 
 
-     const wallet = connected && publicKey
+
+     //if (!connected || !publicKey || !signTransaction || !signAllTransactions) {
+     // return null;
+    //}
+      const wallet = connected && publicKey
     ? {
         publicKey: publicKey.toBase58(),
         signTransaction,
@@ -80,7 +82,9 @@ export default function Playground(){
       }
     : null;
 
-    
+     
+
+      
        const client = createX402Client({
         wallet,
         network: 'solana-devnet',
@@ -89,7 +93,7 @@ export default function Playground(){
 
 
     
-    const  request = await client.fetch("https://itsvelocity-velocity.hf.space/api/00ddax402", {
+    const  request = await client.fetch("https://itsvelocity-velocity.hf.space/api/5e339x402", {
       method: "get",
       mode:"cors",
       headers: {
