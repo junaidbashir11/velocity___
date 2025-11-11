@@ -74,7 +74,12 @@ export default function Playground(){
      //if (!connected || !publicKey || !signTransaction || !signAllTransactions) {
      // return null;
     //}
-      const wallet = connected && publicKey
+
+  
+
+
+    
+    const wallet = connected && publicKey
     ? {
         publicKey: publicKey.toBase58(),
         signTransaction,
@@ -86,12 +91,12 @@ export default function Playground(){
 
       
        const client = createX402Client({
-        wallet,
+        wallet:wallet! as WalletAdapter,
         network: 'solana-devnet',
         maxPaymentAmount:1_000_000n, // Optional: max 10 USDC
     });
 
-
+  
     
     const  request = await client.fetch("https://itsvelocity-velocity.hf.space/api/5e339x402", {
       method: "get",
@@ -102,6 +107,7 @@ export default function Playground(){
       }
     });
     
+  
     const endTime = performance.now();
     const  response = await request.json();
     
@@ -110,6 +116,9 @@ export default function Playground(){
       //setTimeVelocity((endTime - startTime).toFixed(2));
     }
     setLoadingVelocity(false);
+
+
+  
   }
 
  if (isGateEnabled && !token){
