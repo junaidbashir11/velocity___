@@ -1,8 +1,41 @@
 "use client";
-
 import { motion } from "framer-motion";
+import { useState ,useEffect} from "react";
+import { useWallet } from "@solana/wallet-adapter-react";
+
+import TokenGATING from "./tokengatingv2";
+import NoAccessCard from "./accessdenied";
+
+
+
+
 
 export default function MCP() {
+
+  const [token,hasToken]=useState(false)
+  const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
+  const {connected,publicKey}=useWallet()
+
+    useEffect(()=>{
+       
+               if(!isGateEnabled) return ;
+       
+               async function checkToken(){
+               const tokenstatus=await TokenGATING(publicKey?.toBase58());
+               if (tokenstatus==true){
+                 hasToken(true)
+               }
+             }
+             checkToken()
+           
+             },[publicKey,connected])
+
+    if (isGateEnabled && !token){
+          return (
+            <NoAccessCard/>
+          )
+        }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#05070d] via-[#0a0f1c] to-[#05070d] flex flex-col items-center justify-center px-4 py-12 font-sans text-gray-200">
       <motion.div

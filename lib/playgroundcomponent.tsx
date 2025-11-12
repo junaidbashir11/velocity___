@@ -7,7 +7,7 @@ import { Zap, Clock, CheckCircle } from 'lucide-react';
 import { useWallet} from "@solana/wallet-adapter-react";
 import { createX402Client , type WalletAdapter} from 'x402-solana/client';
 import TokenGATING from "./tokengatingv2";
-import NoAccessCard from "./noaccess";
+import NoAccessCard from "./accessdenied";
 import { useEffect } from "react";
 
 

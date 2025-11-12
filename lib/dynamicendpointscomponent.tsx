@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import TokenGATING from "./tokengatingv2";
-import NoAccessCard from "./noaccess";
+import NoAccessCard from "./accessdenied";
 
 
 

@@ -13,6 +13,9 @@ import {
 import { useWallet } from "@solana/wallet-adapter-react";
 import { motion } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import TokenGATING from "./tokengatingv2";
+import NoAccessCard from "./accessdenied";
+
 
 interface SimpleInvoice {
   owner: string;
@@ -29,7 +32,24 @@ export default function AuditComponent() {
   const [selectedSignature, setSelectedSignature] = useState<string | null>(null);
   const { connected, publicKey } = useWallet();
   const [dataLoading,setDataLoading]=useState(false);
+  const [token,hasToken]=useState(false)
+  const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
 
+
+
+  useEffect(()=>{
+     
+             if(!isGateEnabled) return ;
+     
+             async function checkToken(){
+             const tokenstatus=await TokenGATING(publicKey?.toBase58());
+             if (tokenstatus==true){
+               hasToken(true)
+             }
+           }
+           checkToken()
+         
+           },[publicKey,connected])
 
 
    async function getInvoices(wallet:string|null) {
@@ -76,6 +96,12 @@ export default function AuditComponent() {
 
 
 
+
+  if (isGateEnabled && !token){
+        return (
+          <NoAccessCard/>
+        )
+      }
  
 
   return (

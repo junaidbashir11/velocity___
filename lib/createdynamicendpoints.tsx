@@ -16,7 +16,7 @@ import {
 
 
 import TokenGATING from "./tokengatingv2";
-import NoAccessCard from "./noaccess";
+import NoAccessCard from "./accessdenied";
 
 
 export default function DynamicEndpointCreationComponent() {
@@ -25,6 +25,7 @@ export default function DynamicEndpointCreationComponent() {
   const { connected, publicKey } = useWallet();
   const [loading,setLoading]=useState(false);
   const [token,hasToken]=useState(false);
+  const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
   
   const [formValues, setFormValues] = useState({
         endpoint: '',
@@ -35,7 +36,7 @@ export default function DynamicEndpointCreationComponent() {
     });
 
 
-  const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
+
 
   
 
