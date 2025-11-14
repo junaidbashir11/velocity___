@@ -25,12 +25,12 @@ export default function NoAccessCard() {
       Access Denied
     </h2>
 
-    {/* Description */}
+  
     <p className="text-gray-400 text-lg leading-relaxed">
-      You don't have permission to view this resource. Please purchase tokens to continue.
+      You dont have permission to view this resource. Please purchase tokens to continue.
     </p>
 
-    {/* Action button */}
+  
     <button className="w-full px-6 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg shadow-cyan-500/20">
       <a
        href={process.env.NEXT_PUBLIC_PUMP_ENDPOINT}
