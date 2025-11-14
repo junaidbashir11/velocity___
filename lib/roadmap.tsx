@@ -17,8 +17,8 @@ export default function Roadmap() {
       status: "Planned",
     },
     {
-      title: "Other Enhancements",
-      description: "Additional roadmap items to improve developer experience",
+      title: "Multi Token Support",
+      description: "support for more tokens ",
       icon: <Clock className="w-5 h-5 text-green-400" />,
       iconBg: "bg-green-600/20",
       status: "Future",
@@ -26,34 +26,51 @@ export default function Roadmap() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-4 py-16 relative overflow-hidden flex flex-col items-center">
+ <div className="min-h-screen bg-black text-white px-4 py-16 relative overflow-hidden">
       
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 animate-pulse"></div>
+  {/* Background effects */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(6,182,212,0.15),transparent_50%),radial-gradient(circle_at_bottom_right,rgba(20,184,166,0.15),transparent_50%)]" />
+  <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+  
+  {/* Floating orbs */}
+  <div className="absolute top-40 left-10 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-3xl" />
+  <div className="absolute bottom-20 right-10 w-[400px] h-[400px] bg-teal-500/5 rounded-full blur-3xl" />
 
-      {/* Glow */}
-     
-      <div className="relative z-10 w-full max-w-3xl space-y-10">
+  <div className="relative z-10 max-w-5xl mx-auto">
 
-        <div className="space-y-6">
-          {roadmapItems.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex items-start gap-4 p-4 bg-slate-800/50 rounded-2xl  hover:bg-slate-800/70 transition-colors"
-            >
-              <div className={`w-10 h-10 ${item.iconBg} rounded-xl flex items-center justify-center flex-shrink-0`}>
-                {item.icon}
-              </div>
-              <div className="flex flex-col">
-                <h3 className="font-mono text-white text-base md:text-lg font-semibold">
-                  {item.title} <span className="text-gray-400 text-sm">({item.status})</span>
-                </h3>
-                <p className="font-mono text-sm md:text-base text-gray-300 mt-1">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    {/* Header */}
+    <div className="text-center mb-16">
+      <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4">Roadmap</h1>
+      <p className="text-gray-400 text-lg">
+        Accelerate, manage, and dynamically monetize your public API endpoints effortlessly with our advanced platform.
+      </p>
     </div>
+
+    {/* Roadmap Items */}
+    <div className="space-y-12">
+      {roadmapItems.map((item, idx) => (
+        <div key={idx} className="flex items-start gap-6">
+          
+          {/* Icon */}
+          <div className={`w-16 h-16 ${item.iconBg} rounded-2xl flex items-center justify-center flex-shrink-0`}>
+            {item.icon}
+          </div>
+          
+          {/* Content */}
+          <div className="flex-1 pt-1">
+            <div className="flex items-baseline gap-3 mb-2">
+              <h3 className="text-2xl md:text-3xl font-bold text-white">
+                {item.title}
+              </h3>
+              <span className="text-gray-500 text-base">({item.status})</span>
+            </div>
+            <p className="text-gray-400 text-lg leading-relaxed">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</div>
   );
 }

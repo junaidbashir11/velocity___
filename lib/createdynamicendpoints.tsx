@@ -38,28 +38,25 @@ export default function DynamicEndpointCreationComponent() {
 
 
 
-
+     useEffect(()=>{
+     
+             if(!isGateEnabled) return ;
+             if(token) return ;
+              console.log("running")
+              //setIsChecking(true); 
+             async function checkToken(){
+             const tokenstatus=await TokenGATING(publicKey?.toBase58());
+             if (tokenstatus==true){
+               hasToken(true)
+               //setIsChecking(false)
+             }
+           }
+           checkToken()
+           
+         
+           },[publicKey,connected])
   
 
-    useEffect(()=>{
-
-    if (!isGateEnabled) return;  
-    if (token) return
-    setIsChecking(true)
-    async function checkToken(){
-
-
-    const tokenstatus=await TokenGATING(publicKey?.toBase58());
-    if (tokenstatus==true){
-      hasToken(true)
-      setIsChecking(false)
-    }
-  }
-  checkToken()
-
-  },[publicKey,connected])
-
-  
  
 
 
@@ -132,9 +129,9 @@ export default function DynamicEndpointCreationComponent() {
 
 
 
-  if (!connected) return <div>Redirecting...</div>;
+  //if (!connected) return <div>Redirecting...</div>;
 
-  if (isGateEnabled && !isChecking && !token) {
+  if (isGateEnabled  && !token) {
    return <NoAccessCard />;
  }
  

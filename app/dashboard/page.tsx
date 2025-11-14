@@ -68,7 +68,11 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-gray-300">
       {/* Navbar */}
+      
       <main className="max-w-7xl mx-auto px-6 py-10">
+
+        
+            
         {/* Tabs with Top Navigation */}
         <Tabs defaultValue="home" className="w-full">
           {/* Top-centered Tabs */}
@@ -86,8 +90,6 @@ export default function DashboardPage() {
                 { value: "dynamicendpoints", label: "Dynamic Endpoints", icon: RefreshCw },
                 { value: "audit", label: "Audit", icon: LockOpen },
                 { value: "playground", label: "Playground", icon: Play },
-                { value: "profile", label: "Profile", icon: Code },
-                { value: "roadmap", label: "Roadmap", icon: Code },
               ].map((tab) => (
                 <TabsTrigger
                   key={tab.value}
@@ -155,13 +157,10 @@ export default function DashboardPage() {
               <Playground />
             </TabsContent>
 
-            <TabsContent value="profile">
-              <WalletButton/>
-            </TabsContent>
 
-            <TabsContent value="roadmap">
-              <Roadmap />
-            </TabsContent>
+            
+             
+            
           </div>
         </Tabs>
       </main>

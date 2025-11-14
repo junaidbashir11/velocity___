@@ -33,12 +33,12 @@ export default function Playground(){
         if(!isGateEnabled) return ;
         if (token) return
 
-        setIsChecking(true)
+        //setIsChecking(true)
         async function checkToken(){
         const  tokenstatus=await TokenGATING(publicKey?.toBase58());
         if (tokenstatus==true){
           hasToken(true)
-          setIsChecking(false)
+          //setIsChecking(false)
         }
       }
       checkToken()
@@ -124,7 +124,7 @@ export default function Playground(){
   
   }
 
-   if (isGateEnabled && !isChecking && !token) {
+   if (isGateEnabled  && !token) {
         return <NoAccessCard />;
       }
       

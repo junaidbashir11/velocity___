@@ -40,6 +40,7 @@ export default function AuditComponent() {
   useEffect(()=>{
      
              if(!isGateEnabled) return ;
+             if(token) return ;
      
              async function checkToken(){
              const tokenstatus=await TokenGATING(publicKey?.toBase58());

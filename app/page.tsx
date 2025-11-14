@@ -58,6 +58,8 @@ export default function Home() {
 
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0e27]/80 backdrop-blur-2xl border-b border-white/10">
+
+        
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -66,17 +68,7 @@ export default function Home() {
             className="flex items-center gap-3"
           >
             <div className="relative">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64" className="opacity-90">
-                <rect x="6" y="6" width="40" height="52" rx="3" ry="3" fill="#8b5cf6" stroke="#8b5cf6" strokeWidth="2"/>
-                <path d="M46 6v12h12" fill="#8b5cf6" stroke="#8b5cf6" strokeWidth="2"/>
-                <g transform="translate(16,18)">
-                  <line x1="10" y1="6" x2="30" y2="6" stroke="#ffffff" strokeWidth="1.8"/>
-                  <line x1="20" y1="6" x2="20" y2="22" stroke="#ffffff" strokeWidth="1.8"/>
-                  <circle cx="10" cy="6" r="3.3" fill="#ffffff"/>
-                  <circle cx="30" cy="6" r="3.3" fill="#ffffff"/>
-                  <circle cx="20" cy="22" r="3.3" fill="#ffffff"/>
-                </g>
-              </svg>
+             
               <div className="absolute inset-0 bg-purple-500 blur-xl opacity-40"></div>
             </div>
             <span className="text-2xl font-bold tracking-tight text-white">VELOCITY</span>
@@ -94,8 +86,15 @@ export default function Home() {
             </span>
           </motion.div>
 
-          <WalletButton />
+          <WalletButton /> 
+        <a 
+        href="/roadmap"
+        className=''>
+          Roadmap
+        </a>
+
         </div>
+       
       </nav>
 
       {/* Hero Section */}
@@ -121,6 +120,11 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
               Instantly x402, Dynamic x402 & MCP Your API Endpoints
             </p>
+
+          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
+              Entirely Open Source @https://github.com/x402VELOCITY/velocitybackend
+          </p>
+
           </motion.div>
 
           <motion.div
@@ -235,7 +239,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-2xl px-8 py-4">
               <Zap className="w-5 h-5 text-purple-400" />
               <p className="text-gray-300 text-lg">
-                Hold <span className="text-white font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">50k $VC tokens</span> to unlock premium features
+                Hold <span className="text-white font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">{process.env.NEXT_PUBLIC_TOKEN_AMOUNT} $VC tokens</span> to unlock premium features
               </p>
             </div>
           </motion.div>

@@ -3,6 +3,16 @@
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Network, Zap, FileText, Rocket, DollarSign } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const WalletButton = dynamic(
+  () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
+  { 
+    ssr: false,
+    loading: () => <div className="p-2 text-sm text-gray-400">Loading wallet...</div>,
+  }
+);
+
 
 export default function HomeComponent() {
   const [endpointCount, setEndpointCount] = useState<number>(0);
@@ -58,19 +68,25 @@ export default function HomeComponent() {
       {/* Hero Section */}
       <div className="text-center mb-10">
         
-
+        <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
+          <span className="font-mono text-black bg-white p6">Account</span>
+                <WalletButton/>
+          </h1>
           <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
               <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
-                Instantly x402, Dynamic x402 & MCP Your API Endpoints
+                Instantly x402, Dynamic x402 & MCP Your API Endpoints <pre></pre>
+                
               </span>
             </h1>
 
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Accelerate, manage, and dynamically  monetize your public API endpoints effortlessly with our advanced platform.
-        </p>
+        <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <span className="text-xs text-gray-400 font-mono">
+              CA: {process.env.NEXT_PUBLIC_CA}
+        </span>
       </div>
 
       {/* Stats Grid */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
         <div className="rounded-2xl border border-fuchsia-600/30 bg-white/5 backdrop-blur-sm p-6 flex items-center justify-between transition-all hover:border-fuchsia-500/50">
           <div>
