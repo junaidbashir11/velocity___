@@ -103,14 +103,44 @@ const tools = await mcp.listTools();
 console.log("Available tools:", tools);
 
 
+Example: Using an x402 MCP endpoint with Claude SDK
+import { connect } from "@anthropic-ai/mcp-sdk";
+
+const mcp = await connect({
+  server: "https://mcpv100-production.up.railway.app/mcp",
+});
+
+
+const tools = await mcp.listTools();
+console.log("Available tools:", tools);
+
+
 const res = await mcp.invoke("get-data-from-resource-server_by_get_method", {
-  ownerwallet: "devs wallet address who registered the endpoint",
-  endpoint: "/api/{yourtaghere}",
-  privateKey: "private key of the agent wallet"
+    ownerwallet: "devs wallet address who registered the endpoint",
+    endpoint: "/api/{yourtaghere}",
+    privateKey: "private key of the agent wallet"
 });
 
 console.log("MCP Response:", res);
 This example covers GET based endpoints
+
+// ENSURE AGENT HAS ASSOCIATED TOKEN ACCOUNT FOR USDC ON SOLANA
+console.log("MCP Response:", res);
+This example covers GET based endpoints
+
+
+
+
+const res = await mcp.invoke("get-data-from-resource-server_by_post_method", {
+    ownerwallet: "devs wallet address who registered the endpoint",
+    endpoint: "/api",
+    privateKey: "private key of the agent wallet",
+    body:{"key1":"value1"},
+    tag:"endpoint tag here"
+});
+
+console.log("MCP Response:", res);
+This example covers POST based endpoints
 
 `}
           </pre>
