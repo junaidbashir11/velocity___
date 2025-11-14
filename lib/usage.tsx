@@ -16,7 +16,7 @@ export default function Velocity(){
     }
     const client = createX402Client({
       wallet,
-      network: 'network here', //solana-devnet || solana-mainnet
+      network: 'network here', || solana
       maxPaymentAmount: BigInt(1_000_000) , same as your registered price
     });
 
