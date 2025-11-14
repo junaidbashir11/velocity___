@@ -24,18 +24,21 @@ export default function Playground(){
   const {connected,publicKey,signAllTransactions,signTransaction}=useWallet()
   const [token,hasToken]=useState(false)
   const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
-    
+  const [isChecking, setIsChecking] = useState(false)    
 
 
 
   useEffect(()=>{
 
         if(!isGateEnabled) return ;
+        if (token) return
 
+        setIsChecking(true)
         async function checkToken(){
         const  tokenstatus=await TokenGATING(publicKey?.toBase58());
         if (tokenstatus==true){
           hasToken(true)
+          setIsChecking(false)
         }
       }
       checkToken()
@@ -121,13 +124,10 @@ export default function Playground(){
   
   }
 
- if (isGateEnabled && !token){
-      return (
-        <NoAccessCard/>
-      )
-    }
-  
- 
+   if (isGateEnabled && !isChecking && !token) {
+        return <NoAccessCard />;
+      }
+      
 
 
 

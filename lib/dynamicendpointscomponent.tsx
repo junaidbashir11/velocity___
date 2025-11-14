@@ -35,6 +35,7 @@ export default function DynamicEndpointLinkerComponent() {
   const [loading, setLoading] = useState(false);
   const [ploading, setPLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
+  const [isChecking, setIsChecking] = useState(false)
   
 
   const [formValues, setFormValues] = useState({
@@ -47,10 +48,20 @@ export default function DynamicEndpointLinkerComponent() {
   const [token, hasToken] = useState(false);
 
   useEffect(() => {
+
     if (!isGateEnabled) return;
+    if (token) return ;
+
+    setIsChecking(true)
     async function checkToken() {
       const tokenstatus = await TokenGATING(publicKey?.toBase58());
-      if (tokenstatus === true) hasToken(true);
+      if (tokenstatus === true) { 
+        
+        hasToken(true);
+        setIsChecking(false)
+
+      }
+
     }
     checkToken();
   }, [publicKey, connected]);
@@ -72,7 +83,12 @@ export default function DynamicEndpointLinkerComponent() {
 
     if (response.status === true) {
       setDataLoading(false);
-      localStorage.setItem("dynamicendpoints",JSON.stringify(response.dynamicendpoints));
+      console.log(publicKey?.toBase58())
+      if (connected && publicKey){
+
+      localStorage.setItem(`${publicKey?.toBase58()}_dynamicendpoints`,JSON.stringify(response.dynamicendpoints));
+
+      }
       setEndpoints(response.dynamicendpoints);
 
     }
@@ -87,15 +103,17 @@ export default function DynamicEndpointLinkerComponent() {
 
   useEffect(() => {
 
-      const cachedWallet = localStorage.getItem("loaded_wallet");
+      const cachedWallet = localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
       if(cachedWallet){
-        checkendpoints(cachedWallet)
+              checkendpoints(cachedWallet)
       }
-      const endpoints=localStorage.getItem("dynamicendpoints")
+      const endpoints=localStorage.getItem(`${publicKey?.toBase58()}_dynamicendpoints`)
 
       if (endpoints){
+        
         const parsed_endpoints=JSON.parse(endpoints)
         setEndpoints(parsed_endpoints)
+
       }
     
 
@@ -131,7 +149,7 @@ export default function DynamicEndpointLinkerComponent() {
     if (response.status === true) {
       toast.success(`Your endpoint has been updated`);
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem("loaded_wallet")
+      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
       await checkendpoints(cachedWallet);
     }
   };
@@ -155,7 +173,7 @@ export default function DynamicEndpointLinkerComponent() {
     if (response.status === true) {
       setLoading(false);
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem("loaded_wallet")
+      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
       await checkendpoints(cachedWallet);
     }
   };
@@ -180,7 +198,7 @@ export default function DynamicEndpointLinkerComponent() {
     if (response.status === true) {
       setPLoading(false);
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem("loaded_wallet")
+      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
       await checkendpoints(cachedWallet);
     }
   };
@@ -188,10 +206,13 @@ export default function DynamicEndpointLinkerComponent() {
   
 
 
+  if (isGateEnabled && !isChecking && !token) {
+  return <NoAccessCard />;
+}
 
 
 
-  if (isGateEnabled && !token) return <NoAccessCard />;
+  
 
   return (
     <main className="flex justify-center items-start min-h-[85vh] py-10 px-6 bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-800">

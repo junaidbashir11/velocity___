@@ -53,11 +53,14 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!connected && !publicKey) {
-       localStorage.removeItem("loaded_wallet")
+      
       router.push("/");
     }
-    else if (connected && publicKey){
-        localStorage.setItem("loaded_wallet",publicKey.toBase58())
+    else if (connected && publicKey) {
+
+        const walletKey = publicKey.toBase58()
+        console.log(walletKey)
+        localStorage.setItem(`${walletKey}_wallet`,walletKey)
     }
 
   }, [connected, router, publicKey]);

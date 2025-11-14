@@ -26,6 +26,7 @@ export default function DynamicEndpointCreationComponent() {
   const [loading,setLoading]=useState(false);
   const [token,hasToken]=useState(false);
   const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
+  const [isChecking, setIsChecking] = useState(false)
   
   const [formValues, setFormValues] = useState({
         endpoint: '',
@@ -43,12 +44,15 @@ export default function DynamicEndpointCreationComponent() {
     useEffect(()=>{
 
     if (!isGateEnabled) return;  
+    if (token) return
+    setIsChecking(true)
     async function checkToken(){
 
 
     const tokenstatus=await TokenGATING(publicKey?.toBase58());
     if (tokenstatus==true){
       hasToken(true)
+      setIsChecking(false)
     }
   }
   checkToken()
@@ -130,11 +134,10 @@ export default function DynamicEndpointCreationComponent() {
 
   if (!connected) return <div>Redirecting...</div>;
 
-  if (isGateEnabled && !token){
-    return (
-      <NoAccessCard/>
-    )
-  }
+  if (isGateEnabled && !isChecking && !token) {
+   return <NoAccessCard />;
+ }
+ 
 
 
 

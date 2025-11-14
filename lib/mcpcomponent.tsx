@@ -15,26 +15,33 @@ export default function MCP() {
   const [token,hasToken]=useState(false)
   const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
   const {connected,publicKey}=useWallet()
+  const [isChecking, setIsChecking] = useState(false)
+
+
 
     useEffect(()=>{
        
                if(!isGateEnabled) return ;
-       
+               if(token) return
+               setIsChecking(true)
                async function checkToken(){
                const tokenstatus=await TokenGATING(publicKey?.toBase58());
                if (tokenstatus==true){
+
+
                  hasToken(true)
+                 setIsChecking(false)
+
                }
              }
              checkToken()
            
              },[publicKey,connected])
 
-    if (isGateEnabled && !token){
-          return (
-            <NoAccessCard/>
-          )
-        }
+   if (isGateEnabled && !isChecking && !token) {
+      return <NoAccessCard />;
+    }
+    
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#05070d] via-[#0a0f1c] to-[#05070d] flex flex-col items-center justify-center px-4 py-12 font-sans text-gray-200">

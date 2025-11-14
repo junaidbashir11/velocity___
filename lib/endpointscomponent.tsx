@@ -73,7 +73,7 @@ export default function EndpointLinkerComponent() {
 
     if (response.status === true) {
       setDataLoading(false);
-      localStorage.setItem("endpoints",JSON.stringify(response.endpoints));
+      localStorage.setItem(`${publicKey?.toBase58()}_endpoints`,JSON.stringify(response.endpoints));
       setEndpoints(response.endpoints);
 
     }
@@ -96,7 +96,7 @@ export default function EndpointLinkerComponent() {
     const response = await request.json();
     if (response.status === true) {
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem("loaded_wallet")
+      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
       await checkendpoints(cachedWallet);
     }
     setLoading(false);
@@ -118,7 +118,7 @@ export default function EndpointLinkerComponent() {
     const response = await request.json();
     if (response.status === true) {
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem("loaded_wallet");
+      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
       await checkendpoints(cachedWallet);
     }
     setPLoading(false);
@@ -133,15 +133,18 @@ export default function EndpointLinkerComponent() {
 */
   useEffect(() => {
 
-      const cachedWallet = localStorage.getItem("loaded_wallet");
+      const cachedWallet = localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
       if(cachedWallet){
         checkendpoints(cachedWallet)
       }
-      const endpoints=localStorage.getItem("endpoints")
+      const endpoints=localStorage.getItem(`${publicKey?.toBase58()}_endpoints`)
 
       if (endpoints){
-        const parsed_endpoints=JSON.parse(endpoints)
-        setEndpoints(parsed_endpoints)
+
+       const parsed_endpoints=JSON.parse(endpoints)
+       setEndpoints(parsed_endpoints)
+
+        
       }
     
 

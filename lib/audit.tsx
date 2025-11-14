@@ -67,7 +67,7 @@ export default function AuditComponent() {
         if (data.invoices) {
 
           setDataLoading(false);
-          localStorage.setItem("invoices",JSON.stringify(data.invoices));
+          localStorage.setItem(`${publicKey?.toBase58()}_invoices`,JSON.stringify(data.invoices));
           setInvoices(data.invoices);
 
         }
@@ -79,15 +79,21 @@ export default function AuditComponent() {
 
   useEffect(() => {
 
-      const cachedWallet = localStorage.getItem("loaded_wallet");
+      const cachedWallet = localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
       if(cachedWallet){
         getInvoices(cachedWallet)
       }
-      const endpoints=localStorage.getItem("invoices")
+      const endpoints=localStorage.getItem(`${publicKey?.toBase58()}_invoices`)
 
       if (endpoints){
+
         const parsed_endpoints=JSON.parse(endpoints)
+        //setInvoices(parsed_endpoints)
+      
+        
         setInvoices(parsed_endpoints)
+
+        
       }
     
 
