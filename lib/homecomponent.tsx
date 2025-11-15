@@ -69,7 +69,7 @@ export default function HomeComponent() {
       <div className="text-center mb-10">
         
         <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
-          <span className="font-mono text-black bg-white p6">Account</span>
+         
                 <WalletButton/>
           </h1>
           <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">

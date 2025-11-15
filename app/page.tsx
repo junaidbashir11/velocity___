@@ -3,7 +3,8 @@
 import dynamic from 'next/dynamic';
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Link, Zap, RefreshCw, ArrowRight, Sparkles } from "lucide-react";
+import { Link, Zap, RefreshCw, ArrowRight, Sparkles ,GithubIcon,TwitterIcon} from "lucide-react";
+import Roadmap from '@/lib/roadmap';
 
 const WalletButton = dynamic(
   () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
@@ -58,44 +59,43 @@ export default function Home() {
 
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0e27]/80 backdrop-blur-2xl border-b border-white/10">
+  <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    {/* Logo */}
+    <div className="flex items-center gap-3">
+      <div className="relative">
+        <div className="absolute inset-0 bg-purple-500 blur-xl opacity-40"></div>
+      </div>
+      <span className="text-2xl font-bold tracking-tight text-white">VELOCITY</span>
+    </div>
 
-        
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3"
-          >
-            <div className="relative">
-             
-              <div className="absolute inset-0 bg-purple-500 blur-xl opacity-40"></div>
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-white">VELOCITY</span>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="hidden md:flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >
-            <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-            <span className="text-xs text-gray-400 font-mono">
-              CA: {process.env.NEXT_PUBLIC_CA}
-            </span>
-          </motion.div>
+    {/* Right Aligned + Super Tight */}
+    <div className="flex items-center gap-3 ml-auto">
+      {/* Contract */}
+      <div className="hidden md:flex items-center gap-1 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+        <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <span className="text-[10px] text-gray-400 font-mono">
+          CA: {process.env.NEXT_PUBLIC_CA}
+        </span>
+      </div>
 
-          <WalletButton /> 
-        <a 
-        href="/roadmap"
-        className=''>
-          Roadmap
-        </a>
+      {/* Wallet */}
+      <div className="scale-90">
+        <WalletButton />
+      </div>
 
-        </div>
-       
-      </nav>
+      {/* GitHub */}
+      <a href="https://github.com/x402VELOCITY/velocitybackend" className="text-gray-400 hover:text-white transition">
+        <GithubIcon className="w-4 h-4" />
+      </a>
+
+      {/* Twitter */}
+      <a href={process.env.NEXT_PUBLIC_TWITTER} className="text-gray-400 hover:text-white transition">
+        <TwitterIcon className="w-4 h-4" />
+      </a>
+    </div>
+  </div>
+</nav>
+
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6">
@@ -117,12 +117,15 @@ export default function Home() {
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
+            <p className="text-xl font-mono md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
               Instantly x402, Dynamic x402 & MCP Your API Endpoints
             </p>
 
           <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-              Entirely Open Source @https://github.com/x402VELOCITY/velocitybackend
+              <span className="text-gray-400 font-mono">
+                Entirely Open Source @https://github.com/x402VELOCITY/velocitybackend
+              </span>
+              
           </p>
 
           </motion.div>
@@ -236,14 +239,12 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="mt-20 text-center"
           >
-            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-2xl px-8 py-4">
-              <Zap className="w-5 h-5 text-purple-400" />
-              <p className="text-gray-300 text-lg">
-                Hold <span className="text-white font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">{process.env.NEXT_PUBLIC_TOKEN_AMOUNT} $VC tokens</span> to unlock premium features
-              </p>
-            </div>
+           
           </motion.div>
         </div>
+
+        <Roadmap/>
+
       </section>
 
       {/* Footer */}
@@ -252,6 +253,12 @@ export default function Home() {
           <p className="text-gray-500 text-sm">
             © 2025 VELOCITY. Powered by Solana.
           </p>
+           <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-2xl px-8 py-4">
+              <Zap className="w-5 h-5 text-purple-400" />
+              <p className="text-gray-300 text-lg">
+                Hold <span className="text-white font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">{process.env.NEXT_PUBLIC_TOKEN_AMOUNT} $VC tokens</span> to unlock premium features
+              </p>
+            </div>
         </div>
       </footer>
     </main>
