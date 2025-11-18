@@ -74,7 +74,7 @@ export default function Home() {
       <div className="hidden md:flex items-center gap-1 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
         <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
         <span className="text-[10px] text-gray-400 font-mono">
-          CA: {process.env.NEXT_PUBLIC_CA}
+          CA: {process.env.NEXT_PUBLIC_TOKEN}
         </span>
       </div>
 

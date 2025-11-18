@@ -81,7 +81,7 @@ export default function HomeComponent() {
 
         <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
         <span className="text-xs text-gray-400 font-mono">
-              CA: {process.env.NEXT_PUBLIC_CA}
+              CA: {process.env.NEXT_PUBLIC_TOKEN}
         </span>
       </div>
 
