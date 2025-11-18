@@ -82,10 +82,6 @@ export default function Home() {
       <div className="scale-90">
         <WalletButton />
       </div>
-
-       <a href="https://github.com/x402VELOCITY/velocitylongtermandtokenomics" className="text-gray-400 hover:text-white transition">
-         Tokenomics & Long Term Plan
-      </a>
       
       {/* GitHub */}
       <a href="https://github.com/x402VELOCITY" className="text-gray-400 hover:text-white transition">
@@ -127,7 +123,7 @@ export default function Home() {
 
           <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
               <span className="text-gray-400 font-mono">
-                Entirely Open Source @https://github.com/x402VELOCITY
+                Entirely Open Source
               </span>
               
           </p>
