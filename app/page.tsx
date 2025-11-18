@@ -84,7 +84,7 @@ export default function Home() {
       </div>
 
       {/* GitHub */}
-      <a href="https://github.com/x402VELOCITY/velocitybackend" className="text-gray-400 hover:text-white transition">
+      <a href="https://github.com/x402VELOCITY" className="text-gray-400 hover:text-white transition">
         <GithubIcon className="w-4 h-4" />
       </a>
 
@@ -123,7 +123,7 @@ export default function Home() {
 
           <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
               <span className="text-gray-400 font-mono">
-                Entirely Open Source @https://github.com/x402VELOCITY/velocitybackend
+                Entirely Open Source @https://github.com/x402VELOCITY
               </span>
               
           </p>

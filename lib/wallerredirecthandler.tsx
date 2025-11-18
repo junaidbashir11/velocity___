@@ -12,7 +12,7 @@ export function WalletRedirectHandler({ children }: { children: React.ReactNode 
     if (!connected || !publicKey) return;
 
     // Instant feedback — redirect immediately
-    router.push('/dashboard');
+    //router.push('/dashboard');
 
     // Run backend setup silently
     (async () => {
