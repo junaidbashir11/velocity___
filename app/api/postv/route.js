@@ -15,6 +15,14 @@ import { NextResponse } from 'next/server';
 import { X402PaymentHandler } from 'x402-solana/server';
 
 
+const CORS_HEADERS={
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST,OPTIONS',
+    'Access-Control-Allow-Headers': '*', 
+    'Access-Control-Allow-Credentials': 'false', 
+};
+
+
 export async function POST(req) {
 
 
@@ -98,13 +106,32 @@ export async function POST(req) {
   if (!paymentHeader) {
     // Return 402 with payment requirements
     const response = x402.create402Response(paymentRequirements);
-    return NextResponse.json(response.body, { status: response.status });
+    return NextResponse.json(response.body, 
+      
+
+      { 
+        status: response.status,
+        headers:CORS_HEADERS
+    
+       }
+    
+    );
   }
 
   // 3. Verify payment
   const verified = await x402.verifyPayment(paymentHeader, paymentRequirements);
   if (!verified) {
-    return NextResponse.json({ error: 'Invalid payment' }, { status: 402 });
+    return NextResponse.json(
+      
+      { error: 'Invalid payment' }, { 
+        
+        
+        status: 402 ,
+        headers:CORS_HEADERS
+    
+      },
+      
+    );
   }
 
  
@@ -132,5 +159,12 @@ export async function POST(req) {
   await x402.settlePayment(paymentHeader, paymentRequirements);
 
   // 6. Return response
-  return NextResponse.json(result);
+  return NextResponse.json(
+    
+    result,
+     {
+    headers:CORS_HEADERS
+  
+     }
+  );
 }
