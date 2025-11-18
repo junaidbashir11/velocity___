@@ -15,12 +15,28 @@ import { NextResponse } from 'next/server';
 import { X402PaymentHandler } from 'x402-solana/server';
 
 
+
+
 const CORS_HEADERS={
+  
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST,OPTIONS',
     'Access-Control-Allow-Headers': '*', 
     'Access-Control-Allow-Credentials': 'false', 
 };
+
+
+
+export async function OPTIONS() {
+
+  return new Response(null, {
+    status: 200,
+    headers: CORS_HEADERS
+  });
+
+}
+
+
 
 
 export async function POST(req) {
