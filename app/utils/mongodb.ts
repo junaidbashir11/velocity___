@@ -1,4 +1,5 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+//const { MongoClient, ServerApiVersion } = require('mongodb');
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
 // Replace with your actual connection string
 const uri = "mongodb+srv://junaid:junaid@cluster0.0ec6y.mongodb.net/?appName=Cluster0"; 
