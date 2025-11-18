@@ -59,7 +59,7 @@ export default function Velocity(){
           className="mt-10 bg-[#0a1120]/70 border border-[#1e293b] rounded-xl shadow-xl p-5 md:p-7 text-left"
         >
 
-        <p className="text-purple-400 mb-3 font-mono">Example: Using your registered endpoint with Velocity SDK (npm i velocitysdk@1.0.0)</p>
+        <p className="text-purple-400 mb-3 font-mono">Example: Using your registered endpoint with Velocity SDK (npm i velocitysdk)</p>
           <pre className="overflow-x-auto text-xs md:text-sm text-gray-300 font-mono">
 
            {`${codestring}`}
