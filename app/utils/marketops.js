@@ -2,7 +2,7 @@ import { provideClient }  from "../utils/mongodb";
 
 const client = provideClient();
 const db = client.db("x402ify_db");
-const marketplace = db.collection("x402ify_col");
+const marketplace = db.collection("x402marketplace");
 
 
 

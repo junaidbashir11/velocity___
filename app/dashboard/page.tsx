@@ -89,7 +89,7 @@ export default function DashboardPage() {
                 { value: "register_dynamic", label: "Dynamic Register", icon: Zap },
                 { value: "dynamicendpoints", label: "Dynamic Endpoints", icon: RefreshCw },
                 { value: "audit", label: "Audit", icon: LockOpen },
-                { value: "playground", label: "Playground", icon: Play },
+                //{ value: "playground", label: "Playground", icon: Play },
               ].map((tab) => (
                 <TabsTrigger
                   key={tab.value}
@@ -153,9 +153,7 @@ export default function DashboardPage() {
               <AuditComponent/>
             </TabsContent>
 
-            <TabsContent value="playground">
-              <Playground />
-            </TabsContent>
+           
 
 
             

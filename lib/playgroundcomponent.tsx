@@ -95,13 +95,13 @@ export default function Playground(){
       
        const client = createX402Client({
         wallet:wallet! as WalletAdapter,
-        network: 'solana-devnet',
+        network: 'solana',
         maxPaymentAmount:1_000_000n, // Optional: max 10 USDC
     });
 
   
     
-    const  request = await client.fetch("https://itsvelocity-velocity.hf.space/api/5e339x402", {
+    const  request = await client.fetch("https://xvelocity.dev/api/5e339x402", {
       method: "get",
       mode:"cors",
       headers: {
@@ -263,7 +263,7 @@ export default function Playground(){
               <div className="text-center pt-2">
                 <p className="font-mono text-xs text-gray-500 flex items-center justify-center gap-2">
                   <span className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
-                  Earn 1 USDC per request
+                  Real Funds involved 
                 </p>
               </div>
             </div>
