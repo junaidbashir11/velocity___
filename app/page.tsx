@@ -83,6 +83,10 @@ export default function Home() {
         <WalletButton />
       </div>
 
+       <a href="https://github.com/x402VELOCITY/velocitylongtermandtokenomics" className="text-gray-400 hover:text-white transition">
+         Tokenomics & Long Term Plan
+      </a>
+      
       {/* GitHub */}
       <a href="https://github.com/x402VELOCITY" className="text-gray-400 hover:text-white transition">
         <GithubIcon className="w-4 h-4" />
