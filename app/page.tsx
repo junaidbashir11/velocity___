@@ -145,7 +145,7 @@ export default function Home() {
   {/* The container centers the entire image block */}
   <div className="w-full px-4">
     <Image
-      src="/newp.png"
+      src="/newi.png"
       alt="A placeholder graphic"
       
       // 1. Satisfy Next.js by setting large dimensions
@@ -256,7 +256,7 @@ export default function Home() {
            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-2xl px-8 py-4">
               <Zap className="w-5 h-5 text-purple-400" />
               <p className="text-gray-300 text-lg">
-                Hold <span className="text-white font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">{process.env.NEXT_PUBLIC_TOKEN_AMOUNT} $VC tokens</span> to unlock premium features
+                Hold <span className="text-white font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">{process.env.NEXT_PUBLIC_TOKEN_AMOUNT} X402V tokens</span> to unlock premium features
               </p>
             </div>
         </div>
