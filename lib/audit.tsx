@@ -24,7 +24,7 @@ interface SimpleInvoice {
   signature: string;
   payTo: string;
   asset: string;
-  Amount: string;
+  amount: string;
 }
 
 export default function AuditComponent() {
@@ -154,12 +154,8 @@ export default function AuditComponent() {
                       <div className="text-xs text-gray-400">
                         <span className="font-semibold text-gray-300">Amount:</span>
                         <span className="font-mono text-gray-200 ml-1 inline-flex items-center">
-                          {item.Amount}
-                          <Badge className="ml-1 bg-gray-700 text-gray-200 text-[10px] h-4">
-                            <span className="truncate max-w-[50px]" title={item.asset}>
-                              {item.asset}
-                            </span>
-                          </Badge>
+                          {item.amount}
+                          
                         </span>
                       </div>
 
