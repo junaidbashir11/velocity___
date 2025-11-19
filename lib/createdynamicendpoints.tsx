@@ -218,7 +218,7 @@ export default function DynamicEndpointCreationComponent() {
             <Input
               id="meta"
               name="meta"
-              placeholder="Additional metadata"
+              placeholder="metadata like is it get/post if post then its body schema"
               onChange={handleChange}
               required
               className="mt-1 w-full px-4 py-3 bg-white border-2 border-slate-200 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all duration-200 text-slate-800 placeholder-slate-400"
