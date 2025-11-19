@@ -88,7 +88,7 @@ export default function DashboardPage() {
                 { value: "endpoints", label: "Endpoints", icon: List },
                 { value: "register_dynamic", label: "Dynamic Register", icon: Zap },
                 { value: "dynamicendpoints", label: "Dynamic Endpoints", icon: RefreshCw },
-                { value: "audit", label: "Audit", icon: LockOpen },
+                { value: "paymenthistory", label: "PaymentHistory", icon: LockOpen },
                 //{ value: "playground", label: "Playground", icon: Play },
               ].map((tab) => (
                 <TabsTrigger
@@ -149,7 +149,7 @@ export default function DashboardPage() {
               <DynamicEndpointLinkerComponent />
             </TabsContent>
 
-            <TabsContent value="audit">
+            <TabsContent value="paymenthistory">
               <AuditComponent/>
             </TabsContent>
 

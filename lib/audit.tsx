@@ -113,6 +113,7 @@ export default function AuditComponent() {
 
   return (
     <main className="flex justify-center items-start min-h-[80vh] py-10 px-6 bg-gray-900">
+      <h1 className="text-mono text-white text-4xl md:text-4xl font-black tracking-tighter mb-3 leading-none">Endpoint Payment Invoices for settled txns</h1>
       <div className="w-full max-w-3xl bg-gray-800/80 backdrop-blur-md border border-gray-700 rounded-3xl p-8 shadow-lg transition-all duration-300">
         {invoices.length > 0 ? (
           <ScrollArea className="h-[500px] overflow-auto rounded-lg border border-gray-700 p-2">
