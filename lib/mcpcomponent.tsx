@@ -38,7 +38,7 @@ export default function MCP() {
            
              },[publicKey,connected])
 
-   if (isGateEnabled && !isChecking && !token) {
+   if (isGateEnabled  && !token) {
       return <NoAccessCard />;
     }
     
@@ -56,11 +56,21 @@ export default function MCP() {
         </h1>
         <p className="mt-5 text-gray-400 max-w-2xl mx-auto leading-relaxed">
           Every endpoint you register with <span className="text-purple-400 font-semibold">Velocity</span> is automatically exposed 
-          as a fully compliant <span className="text-blue-400 font-semibold">MCP Server</span>.  
+          as a fully compliant <span className="text-blue-400 font-semibold">MCP Server</span>. 
+
           This lets Claude and other MCP-enabled systems query your data natively — 
           no wrappers, no SDKs, just instant context access.
+          You can use the already hosted MCP or run on your own infrastructure.
         </p>
 
+         <div className="bg-[#111827] border border-[#1e293b] rounded-lg p-3 font-mono text-sm text-green-400 mb-6">
+            <i>Run on premesis</i><br />
+            <i>First : git clone https://github.com/x402VELOCITY/velocitymcpsetup.git</i> <br />
+            <i>Second : cd velocitymcpsetup</i> <br />
+            <i>Third : npm install </i><br />
+            <i>Finally : node index.js </i><br />
+            Then use the the server MCP endpoint URL in your MCP client
+          </div>
         
         <div className="mt-12 bg-[#0f172a]/60 border border-[#1e293b] backdrop-blur-md shadow-2xl rounded-2xl p-6 md:p-10 text-left">
           <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">
@@ -70,11 +80,15 @@ export default function MCP() {
             When you register an endpoint, x402 automatically makes it available at:
           </p>
 
-          <div className="bg-[#111827] border border-[#1e293b] rounded-lg p-3 font-mono text-sm text-green-400 mb-6">
-            https://mcpv100-production.up.railway.app/mcp     staging phase
-          </div>
+         
 
           <p className="text-gray-400 leading-relaxed">
+             Velocity Hosted MCP Endpoint: <br />
+
+            <span className="font-mono bg-[#111827] border border-[#1e293b] rounded px-2 py-1 text-green-400">
+              https://mcpv100-production.up.railway.app/mcp
+            </span>
+            <br />
             This endpoint can be directly used in <span className="text-purple-400 font-semibold">Claude Desktop</span> 
             or any MCP client to fetch structured data, run queries, or manage API actions.
           </p>

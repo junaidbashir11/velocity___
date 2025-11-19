@@ -11,6 +11,7 @@ interface MarketInfo {
   owner: string;
   description: string;
   endpoint_linker: string;
+  meta:string,
   price: string;
   endpoint_mcp_base: string;
 }
@@ -59,7 +60,7 @@ export default function EndpointLinkerComponent() {
         <h1 className="text-2xl font-semibold text-slate-100 mb-8 tracking-tight">
           Marketplace <span className="text-slate-400 font-normal">— Discover x402-enabled endpoints</span>
         </h1>
-
+        <p>check the endpoints that u want to use  and their associated  tags  and meta then use them  velocitysdk</p>
         <ScrollArea className="max-h-[70vh] pr-2">
           {market.length ? (
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -83,6 +84,10 @@ export default function EndpointLinkerComponent() {
                   <CardContent className="space-y-3">
                     <p className="text-sm text-slate-300 bg-slate-700/30 px-3 py-2 rounded-md border border-slate-600/30 break-words">
                       {item.description || "No description provided"}
+                    </p>
+
+                    <p className="text-sm text-slate-300 bg-slate-700/30 px-3 py-2 rounded-md border border-slate-600/30 break-words">
+                      {item.meta || "No meta provided"}
                     </p>
 
                     <div className="flex justify-between items-center">
