@@ -14,9 +14,11 @@ import {
   Martini
   
 } from "lucide-react";
+
+
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect ,useState } from "react";
 
 
 import EndpointComponent from "@/lib/x402component";
@@ -33,16 +35,30 @@ import MCP from "@/lib/mcpcomponent";
 import Marketplace from "@/lib/marketplace";
 import HomeComponent from "@/lib/homecomponent";
 import AuditComponent from "@/lib/audit";
-
+import Link from "next/link";
 
 
 
 
 
 export default function DashboardPage() {
-  //const { connected, publicKey } = useWallet();
-  const router = useRouter();
 
+  //const { connected, publicKey } = useWallet();
+   const router = useRouter();
+   const [wallet,setWallet]=useState("");
+
+     useEffect(()=>{
+
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
+    }
+
+  },[])
+
+  if (wallet==""){
+    router.push("/")
+  }
  
 
   return (
@@ -51,7 +67,7 @@ export default function DashboardPage() {
       
       <main className="max-w-7xl mx-auto px-6 py-10">
 
-        <a href="/" className="text-[10px] text-gray-400 font-mono">Home</a>
+        <Link href="/" className="text-[10px] text-gray-400 font-mono">Home</Link>
             
         {/* Tabs with Top Navigation */}
         <Tabs defaultValue="home" className="w-full">
