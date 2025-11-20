@@ -125,12 +125,22 @@ export default function Home() {
               <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
                 VELOCITY
               </span>
-               <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">Stateless Auth Powered by X403</span>
+               
             </h1>
             
             <p className="text-xl font-mono md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
               Instantly x402, Dynamic x402 & MCP Your API Endpoints
             </p>
+
+  <div className="flex flex-col items-center justify-center">
+  <Image
+    width={70}
+    height={69}
+    alt=""
+    src="/eee.jpg"
+  />
+  <p className='text-mono font-bold mt-2'>Auth Powered by x403kit</p>
+</div>
 
          
 
@@ -145,7 +155,7 @@ export default function Home() {
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-3xl blur-2xl opacity-30">
             </div>
 
- 
+
 
         <div className="flex justify-center w-full py-8">
   {/* The container centers the entire image block */}
@@ -184,6 +194,7 @@ export default function Home() {
             <p className="text-center text-gray-400 mb-16 text-lg">
               Powerful tools to accelerate your API infrastructure
             </p>
+
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

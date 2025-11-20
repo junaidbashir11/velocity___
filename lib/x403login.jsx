@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { OpenKit403Client, detectWallets } from '@openkitx403/client';
 import { useRouter } from 'next/navigation';
-import {Ghost} from "lucide-react"
+import {Ghost,CircleDollarSign} from "lucide-react"
 import Image from 'next/image';
 
 function CApp() {
