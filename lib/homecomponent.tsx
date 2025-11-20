@@ -3,15 +3,26 @@
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Network, Zap, FileText, Rocket, DollarSign } from "lucide-react";
+import { toast } from "sonner"
+import { Toaster } from "sonner"
+import { useRouter } from 'next/navigation';
+
 
 export default function HomeComponent() {
   const [endpointCount, setEndpointCount] = useState<number>(0);
   const [dynamicCount, setDynamicCount] = useState<number>(0);
   const [invoiceCount, setInvoiceCount] = useState<number>(0);
   const [wallet,setWallet]=useState("");
+  const router = useRouter();
 
   //const { connected, publicKey } = useWallet();
 
+
+  const Logout=()=>{
+    localStorage.removeItem("loadedwallet")
+    toast.success(`cleared`)
+    router.push('/');
+  }
 
 
   async function checkEndpoints() {
@@ -68,6 +79,7 @@ export default function HomeComponent() {
   return (
     <div className="px-10 py-10 text-gray-200 bg-gray-900 min-h-screen">
       {/* Hero Section */}
+      <Toaster position="top-center" />
       <div className="text-center mb-10">
         
         <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
@@ -83,8 +95,11 @@ export default function HomeComponent() {
 
         <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
         <span className="text-xs text-gray-400 font-mono">
-              CA: {process.env.NEXT_PUBLIC_TOKEN}
-        </span>
+              CA: {process.env.NEXT_PUBLIC_TOKEN} 
+        </span><br/>
+        <button
+        className="w-full justify-start text-white font-sans font-bold data-[state=active]:bg-orange-500 data-[state=active]:text-white rounded-lg px-6 py-2 text-sm font-medium transition-all"
+        onClick={Logout}>Logout</button>
       </div>
 
       {/* Stats Grid */}

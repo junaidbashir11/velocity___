@@ -116,7 +116,7 @@ export default function Home() {
               <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
                 VELOCITY
               </span>
-               <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">Sessionless Auth Powered by X403</span>
+               <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">Stateless Auth Powered by X403</span>
             </h1>
             
             <p className="text-xl font-mono md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
