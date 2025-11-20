@@ -4,16 +4,16 @@ import { useRouter } from 'next/navigation';
 
 function CApp() {
     const [client] = useState(() => new OpenKit403Client());
-    const [wallets, setWallets] = useState<string[]>([]);
-    const [address, setAddress] = useState<string | null>(null);
+    const [wallets, setWallets] = useState([]);
+    const [address, setAddress] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
     detectWallets().then(setWallets);
     }, []);
 
-    const authenticate = async (wallet: string) => {
-        await client.connect(wallet as any);
+    const authenticate = async (wallet) => {
+        await client.connect(wallet);
         const response = await client.authenticate({
             resource: 'https://itsvelocity-velocity.hf.space/accountlogin'
         });
