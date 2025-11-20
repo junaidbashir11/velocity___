@@ -139,7 +139,7 @@ export default function Home() {
     alt=""
     src="/eee.jpg"
   />
-  <p className='text-mono font-bold mt-2'>Auth Powered by x403kit</p>
+  <p className='text-mono font-bold mt-2'>Auth Powered by  OpenKitx403</p>
 </div>
 
          
