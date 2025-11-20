@@ -36,34 +36,14 @@ import AuditComponent from "@/lib/audit";
 
 
 
-import dynamic from "next/dynamic";
 
-const WalletButton = dynamic(
-  () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
-  { 
-    ssr: false,
-    loading: () => <div className="p-2 text-sm text-gray-400">Loading wallet...</div>,
-  }
-);
 
 
 export default function DashboardPage() {
-  const { connected, publicKey } = useWallet();
+  //const { connected, publicKey } = useWallet();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!connected && !publicKey) {
-      
-      router.push("/");
-    }
-    else if (connected && publicKey) {
-
-        const walletKey = publicKey.toBase58()
-        console.log(walletKey)
-        localStorage.setItem(`${walletKey}_wallet`,walletKey)
-    }
-
-  }, [connected, router, publicKey]);
+ 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-gray-300">
@@ -71,7 +51,7 @@ export default function DashboardPage() {
       
       <main className="max-w-7xl mx-auto px-6 py-10">
 
-        
+        <a href="/" className="text-[10px] text-gray-400 font-mono">Home</a>
             
         {/* Tabs with Top Navigation */}
         <Tabs defaultValue="home" className="w-full">

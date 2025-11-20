@@ -3,29 +3,22 @@
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Network, Zap, FileText, Rocket, DollarSign } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const WalletButton = dynamic(
-  () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
-  { 
-    ssr: false,
-    loading: () => <div className="p-2 text-sm text-gray-400">Loading wallet...</div>,
-  }
-);
-
 
 export default function HomeComponent() {
   const [endpointCount, setEndpointCount] = useState<number>(0);
   const [dynamicCount, setDynamicCount] = useState<number>(0);
   const [invoiceCount, setInvoiceCount] = useState<number>(0);
+  const [wallet,setWallet]=useState("");
 
-  const { connected, publicKey } = useWallet();
+  //const { connected, publicKey } = useWallet();
+
+
 
   async function checkEndpoints() {
     const res = await fetch("https://itsvelocity-velocity.hf.space/checkendpoints", {
       mode: "cors",
       method: "post",
-      body: JSON.stringify({ owner: publicKey?.toBase58() }),
+      body: JSON.stringify({ owner: wallet }),
       headers: { "content-type": "application/json" },
     });
     const data = await res.json();
@@ -36,7 +29,7 @@ export default function HomeComponent() {
     const res = await fetch("https://itsvelocity-velocity.hf.space/checkdynamicendpoints", {
       mode: "cors",
       method: "post",
-      body: JSON.stringify({ owner: publicKey?.toBase58() }),
+      body: JSON.stringify({ owner: wallet }),
       headers: { "content-type": "application/json" },
     });
     const data = await res.json();
@@ -47,7 +40,7 @@ export default function HomeComponent() {
     const res = await fetch("https://itsvelocity-velocity.hf.space/invoices", {
       mode: "cors",
       method: "post",
-      body: JSON.stringify({ owner: publicKey?.toBase58() }),
+      body: JSON.stringify({ owner: wallet}),
       headers: { "content-type": "application/json" },
     });
     const data = await res.json();
@@ -55,13 +48,22 @@ export default function HomeComponent() {
     setInvoiceCount(datasize);
   }
 
+   useEffect(()=>{
+
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
+    }
+
+  },[])
+
   useEffect(() => {
-    if (connected && publicKey) {
+    if (wallet) {
       checkEndpoints();
       checkDynamicEndpoints();
       checkInvoices();
     }
-  }, [connected, publicKey]);
+  }, [wallet]);
 
   return (
     <div className="px-10 py-10 text-gray-200 bg-gray-900 min-h-screen">
@@ -70,7 +72,7 @@ export default function HomeComponent() {
         
         <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
          
-                <WalletButton/>
+                
           </h1>
           <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
               <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">

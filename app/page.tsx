@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Link, Zap, RefreshCw, ArrowRight, Sparkles ,GithubIcon,TwitterIcon} from "lucide-react";
 import Roadmap from '@/lib/roadmap';
+import CApp from '@/lib/x403login';
 
 const WalletButton = dynamic(
   () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
@@ -80,7 +81,7 @@ export default function Home() {
 
       {/* Wallet */}
       <div className="scale-90">
-        <WalletButton />
+        <CApp/>
       </div>
       
       {/* GitHub */}
@@ -108,25 +109,21 @@ export default function Home() {
           >
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-full px-6 py-2 mb-8">
               <Sparkles className="w-4 h-4 text-purple-400" />
-              <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">X402 Protocol</span>
+              <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">X402 Protocol (Entirely Open Source)</span>
             </div>
 
             <h1 className="text-7xl md:text-9xl font-black tracking-tighter mb-8 leading-none">
               <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
                 VELOCITY
               </span>
+               <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">Sessionless Auth Powered by X403</span>
             </h1>
             
             <p className="text-xl font-mono md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
               Instantly x402, Dynamic x402 & MCP Your API Endpoints
             </p>
 
-          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-              <span className="text-gray-400 font-mono">
-                Entirely Open Source
-              </span>
-              
-          </p>
+         
 
           </motion.div>
 
@@ -143,33 +140,10 @@ export default function Home() {
 
         <div className="flex justify-center w-full py-8">
   {/* The container centers the entire image block */}
-  <div className="w-full px-4">
-    <Image
-      src="/newi.png"
-      alt="A placeholder graphic"
-      
-      // 1. Satisfy Next.js by setting large dimensions
-      width={1600} 
-      height={400} 
-      
-      // 2. Use Tailwind to enforce visual sizing and centering
-      className="
-        block           /* Forces it to be a block element */ /* Centers the image horizontally */
-        w-full          /* Takes 100% of the parent container's width */
-        max-w-20xl       /* Keeps it wide (e.g., up to 6xl width) */
-        h-300          /* Enforces a short visual height */
-        object-cover    /* Ensures the image fills the short container */
-        rounded-xl
-        shadow-2xl
-      "
-    />
-  </div>
+ 
 </div>
 
 
-
-
- 
           </motion.div>
           
           <motion.div 
@@ -243,9 +217,11 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <Roadmap/>
+       
 
       </section>
+
+      <Roadmap/>
 
       {/* Footer */}
       <footer className="relative py-12 px-6 border-t border-white/10 mt-20">

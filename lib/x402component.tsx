@@ -2,6 +2,7 @@ import { useState} from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useEffect } from "react";
 
 import { Link,FileText, Globe,DollarSign } from 'lucide-react';
 
@@ -17,14 +18,15 @@ import {
 
 
 import { Spinner } from "@/components/ui/spinner"
-import { request } from "http";
+//import { request } from "http";
 
 
 export default function EndpointComponent() {
 
 
-   const { connected, publicKey } = useWallet();
-   const [loading,setLoading]=useState(false)
+  //const { connected, publicKey } = useWallet();
+  const [loading,setLoading]=useState(false)
+  const [wallet,setWallet]=useState("");
 
 
   
@@ -37,6 +39,16 @@ export default function EndpointComponent() {
 
     });
 
+
+     useEffect(()=>{
+    
+        const wallet=localStorage.getItem("loadedwallet")
+        if (wallet){
+          setWallet(wallet)
+        }
+    
+      },[])
+    
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
       setFormValues({
@@ -60,7 +72,7 @@ export default function EndpointComponent() {
         mode: "cors",
         body:JSON.stringify({
 
-          owner:publicKey?.toBase58(),
+          owner:wallet,
           endpoint:formValues.endpoint,
           description:formValues.description,
           meta:formValues.meta,
@@ -106,7 +118,7 @@ export default function EndpointComponent() {
 
 
 
-  if (!connected) return <div>Redirecting...</div>;
+ 
 
   
   

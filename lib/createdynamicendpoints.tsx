@@ -15,18 +15,17 @@ import {
 } from "@/components/ui/field"
 
 
-import TokenGATING from "./tokengatingv2";
-import NoAccessCard from "./accessdenied";
+//import TokenGATING from "./tokengatingv2";
+//import NoAccessCard from "./accessdenied";
 
 
 export default function DynamicEndpointCreationComponent() {
 
 
-  const { connected, publicKey } = useWallet();
+  //const { connected, publicKey } = useWallet();
   const [loading,setLoading]=useState(false);
   const [token,hasToken]=useState(false);
-  const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
-  const [isChecking, setIsChecking] = useState(false)
+  const [wallet,setWallet]=useState("");
   
   const [formValues, setFormValues] = useState({
         endpoint: '',
@@ -37,24 +36,17 @@ export default function DynamicEndpointCreationComponent() {
     });
 
 
+    useEffect(()=>{
 
-     useEffect(()=>{
-     
-             if(!isGateEnabled) return ;
-             if(token) return ;
-              console.log("running")
-              //setIsChecking(true); 
-             async function checkToken(){
-             const tokenstatus=await TokenGATING(publicKey?.toBase58());
-             if (tokenstatus==true){
-               hasToken(true)
-               //setIsChecking(false)
-             }
-           }
-           checkToken()
-           
-         
-           },[publicKey,connected])
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
+    }
+
+  },[])
+
+
+    
   
 
  
@@ -85,7 +77,7 @@ export default function DynamicEndpointCreationComponent() {
         mode: "cors",
         body:JSON.stringify({
 
-          "owner":publicKey?.toBase58(),
+          "owner":wallet,
           "endpoint":formValues.endpoint,
           "description":formValues.description,
           "meta":formValues.meta,
@@ -131,10 +123,7 @@ export default function DynamicEndpointCreationComponent() {
 
   //if (!connected) return <div>Redirecting...</div>;
 
-  if (isGateEnabled  && !token) {
-   return <NoAccessCard />;
- }
- 
+
 
 
 

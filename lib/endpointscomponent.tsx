@@ -23,11 +23,12 @@ interface EndInfo {
 }
 
 export default function EndpointLinkerComponent() {
-  const { connected, publicKey } = useWallet();
+  //const { connected, publicKey } = useWallet();
   const [endpoints, setEndpoints] = useState<EndInfo[]>([]);
   const [loading, setLoading] = useState(false);
   const [ploading, setPLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
+  const [wallet,setWallet]=useState("");
 
   const [formValues, setFormValues] = useState({
     endpoint_linker: "",
@@ -37,6 +38,17 @@ export default function EndpointLinkerComponent() {
   const handlePChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
+
+
+
+   useEffect(()=>{
+
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
+    }
+
+  },[])
 
 
 /*
@@ -73,7 +85,7 @@ export default function EndpointLinkerComponent() {
 
     if (response.status === true) {
       setDataLoading(false);
-      localStorage.setItem(`${publicKey?.toBase58()}_endpoints`,JSON.stringify(response.endpoints));
+      localStorage.setItem(`${wallet}_endpoints`,JSON.stringify(response.endpoints));
       setEndpoints(response.endpoints);
 
     }
@@ -90,13 +102,13 @@ export default function EndpointLinkerComponent() {
     const request = await fetch("https://itsvelocity-velocity.hf.space/delete_endpoint", {
       method: "post",
       mode: "cors",
-      body: JSON.stringify({ owner: publicKey?.toBase58(), endpoint_linker: tag }),
+      body: JSON.stringify({ owner: wallet, endpoint_linker: tag }),
       headers: { "content-type": "application/json" },
     });
     const response = await request.json();
     if (response.status === true) {
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
+      const cachedWallet=localStorage.getItem(`loadedwallet`)
       await checkendpoints(cachedWallet);
     }
     setLoading(false);
@@ -109,7 +121,7 @@ export default function EndpointLinkerComponent() {
       mode: "cors",
       method: "post",
       body: JSON.stringify({
-        owner: publicKey?.toBase58(),
+        owner: wallet,
         endpoint_linker: tag,
         price: formValues.new_price,
       }),
@@ -118,7 +130,7 @@ export default function EndpointLinkerComponent() {
     const response = await request.json();
     if (response.status === true) {
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
+      const cachedWallet=localStorage.getItem(`loadedwallet`);
       await checkendpoints(cachedWallet);
     }
     setPLoading(false);
@@ -133,11 +145,11 @@ export default function EndpointLinkerComponent() {
 */
   useEffect(() => {
 
-      const cachedWallet = localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
+      const cachedWallet = localStorage.getItem(`loadedwallet`);
       if(cachedWallet){
         checkendpoints(cachedWallet)
       }
-      const endpoints=localStorage.getItem(`${publicKey?.toBase58()}_endpoints`)
+      const endpoints=localStorage.getItem(`${wallet}_endpoints`)
 
       if (endpoints){
 
@@ -149,7 +161,7 @@ export default function EndpointLinkerComponent() {
     
 
 
-  }, [connected, publicKey]);
+  }, [wallet]);
 
  
 

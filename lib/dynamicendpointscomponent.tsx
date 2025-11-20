@@ -30,12 +30,13 @@ interface EndInfo {
 
 export default function DynamicEndpointLinkerComponent() {
 
-  const { connected, publicKey } = useWallet();
+  
   const [endpoints, setEndpoints] = useState<EndInfo[]>([]);
   const [loading, setLoading] = useState(false);
   const [ploading, setPLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
-  const [isChecking, setIsChecking] = useState(false)
+  //const [isChecking, setIsChecking] = useState(false)
+  const [wallet,setWallet]=useState("");
   
 
   const [formValues, setFormValues] = useState({
@@ -47,24 +48,18 @@ export default function DynamicEndpointLinkerComponent() {
   const isGateEnabled = process.env.NEXT_PUBLIC_CLOSEOFF === "TRUE";
   const [token, hasToken] = useState(false);
 
-  useEffect(() => {
+ 
 
-    if (!isGateEnabled) return;
-    if (token) return ;
 
-    setIsChecking(true)
-    async function checkToken() {
-      const tokenstatus = await TokenGATING(publicKey?.toBase58());
-      if (tokenstatus === true) { 
-        
-        hasToken(true);
-        setIsChecking(false)
+    useEffect(()=>{
 
-      }
-
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
     }
-    checkToken();
-  }, [publicKey, connected]);
+
+  },[])
+
 
 
 
@@ -83,10 +78,10 @@ export default function DynamicEndpointLinkerComponent() {
 
     if (response.status === true) {
       setDataLoading(false);
-      console.log(publicKey?.toBase58())
-      if (connected && publicKey){
+      console.log(wallet)
+      if (wallet){
 
-      localStorage.setItem(`${publicKey?.toBase58()}_dynamicendpoints`,JSON.stringify(response.dynamicendpoints));
+      localStorage.setItem(`${wallet}_dynamicendpoints`,JSON.stringify(response.dynamicendpoints));
 
       }
       setEndpoints(response.dynamicendpoints);
@@ -103,11 +98,11 @@ export default function DynamicEndpointLinkerComponent() {
 
   useEffect(() => {
 
-      const cachedWallet = localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
+      const cachedWallet = localStorage.getItem(`loadedwallet`);
       if(cachedWallet){
               checkendpoints(cachedWallet)
       }
-      const endpoints=localStorage.getItem(`${publicKey?.toBase58()}_dynamicendpoints`)
+      const endpoints=localStorage.getItem(`${wallet}_dynamicendpoints`)
 
       if (endpoints){
         
@@ -118,7 +113,7 @@ export default function DynamicEndpointLinkerComponent() {
     
 
 
-  }, [connected, publicKey]);
+  }, [wallet]);
 
 
 
@@ -138,7 +133,7 @@ export default function DynamicEndpointLinkerComponent() {
         mode: "cors",
         method: "post",
         body: JSON.stringify({
-          owner: publicKey?.toBase58(),
+          owner: wallet,
           tag,
           newendpoint: formValues.new_endpoint,
         }),
@@ -149,7 +144,7 @@ export default function DynamicEndpointLinkerComponent() {
     if (response.status === true) {
       toast.success(`Your endpoint has been updated`);
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
+      const cachedWallet=localStorage.getItem(`loadedwallet`)
       await checkendpoints(cachedWallet);
     }
   };
@@ -163,7 +158,7 @@ export default function DynamicEndpointLinkerComponent() {
         mode: "cors",
         method: "post",
         body: JSON.stringify({
-          owner: publicKey?.toBase58(),
+          owner: wallet,
           endpoint_linker: tag,
         }),
         headers: { "content-type": "application/json" },
@@ -173,7 +168,7 @@ export default function DynamicEndpointLinkerComponent() {
     if (response.status === true) {
       setLoading(false);
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
+      const cachedWallet=localStorage.getItem(`loadedwallet`)
       await checkendpoints(cachedWallet);
     }
   };
@@ -187,7 +182,7 @@ export default function DynamicEndpointLinkerComponent() {
         mode: "cors",
         method: "post",
         body: JSON.stringify({
-          owner: publicKey?.toBase58(),
+          owner: wallet,
           endpoint_linker: tag,
           price: formValues.new_price,
         }),
@@ -198,7 +193,7 @@ export default function DynamicEndpointLinkerComponent() {
     if (response.status === true) {
       setPLoading(false);
       setEndpoints([]);
-      const cachedWallet=localStorage.getItem(`${publicKey?.toBase58()}_wallet`)
+      const cachedWallet=localStorage.getItem(`loadedwallet`)
       await checkendpoints(cachedWallet);
     }
   };
@@ -206,11 +201,7 @@ export default function DynamicEndpointLinkerComponent() {
   
 
 
-  if (isGateEnabled && !isChecking && !token) {
-  return <NoAccessCard />;
-}
-
-
+ 
 
   
 

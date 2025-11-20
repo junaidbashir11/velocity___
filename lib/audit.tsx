@@ -10,11 +10,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useWallet } from "@solana/wallet-adapter-react";
+
 import { motion } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import TokenGATING from "./tokengatingv2";
-import NoAccessCard from "./accessdenied";
+
 
 
 interface SimpleInvoice {
@@ -28,35 +27,33 @@ interface SimpleInvoice {
 }
 
 export default function AuditComponent() {
+
   const [invoices, setInvoices] = useState<SimpleInvoice[]>([]);
   const [selectedSignature, setSelectedSignature] = useState<string | null>(null);
-  const { connected, publicKey } = useWallet();
+  //const { connected, wallet } = useWallet();
+  const [wallet,setWallet]=useState("");
   const [dataLoading,setDataLoading]=useState(false);
-  const [token,hasToken]=useState(false)
-  const isGateEnabled=process.env.NEXT_PUBLIC_CLOSEOFF==="TRUE";
+  
 
 
 
   useEffect(()=>{
-     
-             if(!isGateEnabled) return ;
-             if(token) return ;
-     
-             async function checkToken(){
-             const tokenstatus=await TokenGATING(publicKey?.toBase58());
-             if (tokenstatus==true){
-               hasToken(true)
-             }
-           }
-           checkToken()
-         
-           },[publicKey,connected])
+
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
+    }
+    console.log(wallet)
+
+  },[])
+
+  
 
 
    async function getInvoices(wallet:string|null) {
 
       setDataLoading(true)
-      if (!publicKey) return;
+      if (!wallet) return;
       try {
         const res = await fetch("https://itsvelocity-velocity.hf.space/invoices", {
           mode: "cors",
@@ -68,7 +65,7 @@ export default function AuditComponent() {
         if (data.invoices) {
 
           setDataLoading(false);
-          localStorage.setItem(`${publicKey?.toBase58()}_invoices`,JSON.stringify(data.invoices));
+          localStorage.setItem(`${wallet}_invoices`,JSON.stringify(data.invoices));
           setInvoices(data.invoices);
 
         }
@@ -80,11 +77,11 @@ export default function AuditComponent() {
 
   useEffect(() => {
 
-      const cachedWallet = localStorage.getItem(`${publicKey?.toBase58()}_wallet`);
+      const cachedWallet = localStorage.getItem(`${wallet}_wallet`);
       if(cachedWallet){
         getInvoices(cachedWallet)
       }
-      const endpoints=localStorage.getItem(`${publicKey?.toBase58()}_invoices`)
+      const endpoints=localStorage.getItem(`${wallet}_invoices`)
 
       if (endpoints){
 
@@ -99,16 +96,9 @@ export default function AuditComponent() {
     
 
 
-  }, [connected, publicKey]);
+  }, [wallet]);
 
 
-
-
-  if (isGateEnabled && !token){
-        return (
-          <NoAccessCard/>
-        )
-      }
  
 
   return (

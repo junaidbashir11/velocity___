@@ -11,8 +11,8 @@ export function WalletRedirectHandler({ children }: { children: React.ReactNode 
   useEffect(() => {
     if (!connected || !publicKey) return;
 
-    // Instant feedback — redirect immediately
-    router.push('/dashboard');
+    //Instant feedback — redirect immediately
+    //router.push('/dashboard');
 
     // Run backend setup silently
     (async () => {
