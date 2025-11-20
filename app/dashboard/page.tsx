@@ -44,7 +44,7 @@ import Link from "next/link";
 export default function DashboardPage() {
 
   //const { connected, publicKey } = useWallet();
-   const router = useRouter();
+   //const router = useRouter();
    const [wallet,setWallet]=useState("");
 
      useEffect(()=>{
@@ -57,7 +57,7 @@ export default function DashboardPage() {
   },[])
 
   if (wallet==""){
-    router.push("/")
+    //router.push("/")
   }
  
 

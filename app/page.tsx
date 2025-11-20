@@ -7,6 +7,7 @@ import { Link, Zap, RefreshCw, ArrowRight, Sparkles ,GithubIcon,TwitterIcon} fro
 import Roadmap from '@/lib/roadmap';
 import CApp from '@/lib/x403login';
 
+
 const WalletButton = dynamic(
   () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
   { 
@@ -66,7 +67,15 @@ export default function Home() {
       <div className="relative">
         <div className="absolute inset-0 bg-purple-500 blur-xl opacity-40"></div>
       </div>
-      <span className="text-2xl font-bold tracking-tight text-white">VELOCITY</span>
+      <span className="text-2xl font-bold tracking-tight text-white">
+        <Image 
+        height={50} 
+        width={50}
+        alt="velocity"
+        src="/vvv.ico"
+        />
+        </span>
+      
     </div>
 
     {/* Right Aligned + Super Tight */}

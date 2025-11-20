@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { OpenKit403Client, detectWallets } from '@openkitx403/client';
 import { useRouter } from 'next/navigation';
+import {Ghost} from "lucide-react"
+import Image from 'next/image';
 
 function CApp() {
     const [client] = useState(() => new OpenKit403Client());
@@ -12,8 +14,12 @@ function CApp() {
     detectWallets().then(setWallets);
     }, []);
 
+
     const authenticate = async (wallet) => {
+
+
         await client.connect(wallet);
+        {console.log(wallet.wallet)}
         const response = await client.authenticate({
             resource: 'https://itsvelocity-velocity.hf.space/accountlogin'
         });
@@ -33,16 +39,18 @@ function CApp() {
 
     return (
         <div>
-            <h1>X403</h1>
             {address ? (
                 <p>✅ Connected as: {address}</p>
                 ) : (
                 wallets.map(wallet => (
+                
                 <button key={wallet} onClick={() => authenticate(wallet)}
-                 className="text-bg text-mono bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 w-full"
+                 className="text-bg text-mono text-white hover:bg-rose-500/20 w-full"
                 
                 >
-                    Connect {wallet}
+                   {wallet=="phantom"?<section><Ghost/></section>:
+                   <section className='text-mono'>{wallet}
+                   </section>}
                 </button>
                 ))
             )}
