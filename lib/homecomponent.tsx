@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
 import { Network, Zap, FileText, Rocket, DollarSign } from "lucide-react";
 import { toast } from "sonner"
 import { Toaster } from "sonner"

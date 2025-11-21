@@ -133,13 +133,8 @@ export default function Home() {
             </p>
 
   <div className="flex flex-col items-center justify-center">
-  <Image
-    width={70}
-    height={69}
-    alt=""
-    src="/eee.jpg"
-  />
-  <p className='text-mono font-bold mt-2'>Auth Powered by  OpenKitx403</p>
+
+  <p className='text-mono font-bold mt-2'>Stateless Auth</p>
 </div>
 
          

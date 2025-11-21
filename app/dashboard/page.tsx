@@ -36,6 +36,7 @@ import Marketplace from "@/lib/marketplace";
 import HomeComponent from "@/lib/homecomponent";
 import AuditComponent from "@/lib/audit";
 import Link from "next/link";
+import { Label } from "@radix-ui/react-label";
 
 
 
@@ -79,6 +80,7 @@ export default function DashboardPage() {
                 {value:"home",label:"Home",icon:HomeIcon},
                 { value: "mcp", label: "MCP", icon: Globe },
                 { value: "usage", label: "Usage", icon: Globe },
+                {value:"marketplace",label:"Marketplace",icon:Martini},
                 { value: "x402ify", label: "Register Endpoints", icon: List },
                 { value: "endpoints", label: "Endpoints", icon: List },
                 { value: "register_dynamic", label: "Dynamic Register", icon: Zap },
@@ -125,6 +127,9 @@ export default function DashboardPage() {
             </TabsContent>
 
              
+              <TabsContent value="marketplace">
+              <Marketplace/>
+            </TabsContent>
 
             <TabsContent value="x402ify">
               <EndpointComponent />

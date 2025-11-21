@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useWallet } from "@solana/wallet-adapter-react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Network, CheckCircle, XCircle } from "lucide-react";
@@ -17,8 +16,22 @@ interface MarketInfo {
 }
 
 export default function EndpointLinkerComponent() {
-  const { connected, publicKey } = useWallet();
+
   const [market, setMarket] = useState<MarketInfo[]>([]);
+  const [wallet,setWallet]=useState("");
+
+
+
+
+    useEffect(()=>{
+
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
+    }
+
+  },[])
+
 
   async function checkmarket() {
     const request = await fetch("https://itsvelocity-velocity.hf.space/marketdata", {
@@ -49,7 +62,7 @@ export default function EndpointLinkerComponent() {
     
 
 
-  }, [connected, publicKey]);
+  }, [wallet]);
 
 
 
@@ -57,10 +70,10 @@ export default function EndpointLinkerComponent() {
   return (
     <main className="flex justify-center items-start min-h-[85vh] py-10 px-6 bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-800">
       <div className="w-full max-w-[95rem] rounded-3xl p-6 transition-all duration-300">
-        <h1 className="text-2xl font-semibold text-slate-100 mb-8 tracking-tight">
+        <h1 className="text-2xl font-semibold text-slate-100 mb-6 tracking-tight">
           Marketplace <span className="text-slate-400 font-normal">— Discover x402-enabled endpoints</span>
         </h1>
-        <p>check the endpoints that u want to use  and their associated  tags  and meta then use them  velocitysdk</p>
+        <p className="font-mono">Check the endpoints that u want to use  and their associated  tags and use them via  velocitysdk</p>
         <ScrollArea className="max-h-[70vh] pr-2">
           {market.length ? (
             <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
