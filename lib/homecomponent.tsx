@@ -97,7 +97,18 @@ export default function HomeComponent() {
               CA: {process.env.NEXT_PUBLIC_TOKEN} 
         </span><br/>
         <button
-        className="w-full justify-start text-white font-sans font-bold data-[state=active]:bg-orange-500 data-[state=active]:text-white rounded-lg px-6 py-2 text-sm font-medium transition-all"
+        className="
+            flex items-center justify-start gap-3
+            w-full p-3
+            rounded-lg 
+            transition duration-200 
+            bg-gray-800/80 
+            border border-transparent
+            hover:bg-purple-600/30 
+            hover:border-fuchsia-500 
+            shadow-md
+            hover:scale-[1.02]
+        "
         onClick={Logout}>Logout</button>
       </div>
 

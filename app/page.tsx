@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from 'next/dynamic';
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Link, Zap, RefreshCw, ArrowRight, Sparkles ,GithubIcon,TwitterIcon} from "lucide-react";
@@ -8,13 +7,7 @@ import Roadmap from '@/lib/roadmap';
 import CApp from '@/lib/x403login';
 
 
-const WalletButton = dynamic(
-  () => import('@/lib/solanawalletbutton').then(mod => mod.SolanaWalletButton),
-  { 
-    ssr: false,
-    loading: () => <div className="p-2 text-sm text-gray-400">Loading wallet...</div>,
-  }
-);
+
 
 const features = [
   {
@@ -83,24 +76,22 @@ export default function Home() {
       {/* Contract */}
       <div className="hidden md:flex items-center gap-1 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
         <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-        <span className="text-[10px] text-gray-400 font-mono">
+        <span className="text-[18px] text-gray-400 font-mono">
           CA: {process.env.NEXT_PUBLIC_TOKEN}
         </span>
       </div>
 
       {/* Wallet */}
-      <div className="scale-90">
-        <CApp/>
-      </div>
+      
       
       {/* GitHub */}
       <a href="https://github.com/x402VELOCITY" className="text-gray-400 hover:text-white transition">
-        <GithubIcon className="w-4 h-4" />
+        <GithubIcon className="w-8 h-8" />
       </a>
 
       {/* Twitter */}
       <a href={process.env.NEXT_PUBLIC_TWITTER} className="text-gray-400 hover:text-white transition">
-        <TwitterIcon className="w-4 h-4" />
+        <TwitterIcon className="w-8 h-8" />
       </a>
     </div>
   </div>
@@ -108,13 +99,13 @@ export default function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6">
+      <section className="relative pt-30 pb-2 px-1">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center mb-1"
           >
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-full px-6 py-2 mb-8">
               <Sparkles className="w-4 h-4 text-purple-400" />
@@ -124,20 +115,22 @@ export default function Home() {
             <h1 className="text-7xl md:text-9xl font-black tracking-tighter mb-8 leading-none">
               <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
                 VELOCITY
-              </span>
-               
+              </span>         
             </h1>
-            
-            <p className="text-xl font-mono md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-light">
-              Instantly x402, Dynamic x402 & MCP Your API Endpoints
-            </p>
+           
 
-  <div className="flex flex-col items-center justify-center">
+<div className="flex flex-col items-center justify-center">
 
-  <p className='text-mono font-bold mt-2'>Stateless Auth</p>
+  <p className='text-xl font-mono md:text-1xl text-gray-400 mb-10 max-w-3xl mx-auto font-light tracking-tight'>Instantly x402 , Dynamic x402 and MCP your API endpoints</p>
+   <section>
+          <CApp/>
+  </section>
+ 
 </div>
 
-         
+
+
+
 
           </motion.div>
 
@@ -145,17 +138,10 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mb-12"
+            className="relative mb-1"
           >
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 rounded-3xl blur-2xl opacity-30">
             </div>
-
-
-
-        <div className="flex justify-center w-full py-8">
-  {/* The container centers the entire image block */}
- 
-</div>
 
 
           </motion.div>
@@ -187,7 +173,7 @@ export default function Home() {
               </span>
             </h2>
             <p className="text-center text-gray-400 mb-16 text-lg">
-              Powerful tools to accelerate your API infrastructure
+              Instantly x402 , Dynamic x402 and MCP your API endpoints
             </p>
 
           </motion.div>
