@@ -37,6 +37,7 @@ import HomeComponent from "@/lib/homecomponent";
 import AuditComponent from "@/lib/audit";
 import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
+import MaintenancePage from "@/lib/underm";
 
 
 
@@ -46,9 +47,25 @@ export default function DashboardPage() {
 
   //const { connected, publicKey } = useWallet();
    //const router = useRouter();
+  const [off,setOff]=useState("")
    const [wallet,setWallet]=useState("");
 
-     useEffect(()=>{
+
+
+  useEffect(()=>{
+    const offflag=process.env.NEXT_PUBLIC_OFF
+    if (offflag=='TRUE'){
+      setOff("TRUE")
+    }
+    else {
+      setOff("FALSE")
+    }
+
+},[])
+
+
+
+    useEffect(()=>{
 
     const wallet=localStorage.getItem("loadedwallet")
     if (wallet){
@@ -61,6 +78,13 @@ export default function DashboardPage() {
     //router.push("/")
   }
  
+
+  if(off=="TRUE"){
+    return (
+      <MaintenancePage/>
+    )
+  }
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-gray-300">

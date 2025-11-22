@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { Link, Zap, RefreshCw, ArrowRight, Sparkles ,GithubIcon,TwitterIcon} from "lucide-react";
 import Roadmap from '@/lib/roadmap';
 import CApp from '@/lib/x403login';
-
-
+import { useEffect ,useState} from "react";
+import MaintenancePage from "@/lib/underm";
 
 
 const features = [
@@ -39,6 +39,26 @@ const features = [
 ];
 
 export default function Home() {
+
+  const [off,setOff]=useState("")
+
+useEffect(()=>{
+    const offflag=process.env.NEXT_PUBLIC_OFF
+    if (offflag=='TRUE'){
+      setOff("TRUE")
+    }
+    else {
+      setOff("FALSE")
+    }
+
+},[])
+
+if(off=="TRUE"){
+  return (
+    <MaintenancePage/>
+  )
+}
+
   return (
     <main className="min-h-screen bg-[#0a0e27] text-white overflow-hidden">
       
