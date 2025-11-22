@@ -112,7 +112,7 @@ if(off=="TRUE"){
       
       
       {/* GitHub */}
-      <a href="https://github.com/x402VELOCITY" className="text-gray-400 hover:text-white transition">
+      <a href="https://github.com/VELOCITYINFRA" className="text-gray-400 hover:text-white transition">
         <GithubIcon className="w-8 h-8" />
       </a>
 
