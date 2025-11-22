@@ -51,7 +51,7 @@ function CApp() {
         function buildSigningPayload(nonce) {
 
             //const requestUrl = url; // exact request URL
-                const secretDomain = "JUNAID"; // must match server
+                const secretDomain = "VELOCITY"; // must match server
                 return `CHALLENGE::${nonce}::${path}::${secretDomain}`;
 
         }
