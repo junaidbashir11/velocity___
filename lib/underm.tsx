@@ -14,13 +14,13 @@ export default function MaintenancePage() {
         </h1>
         
         <p className="text-xl md:text-2xl text-purple-200 mb-8">
-          We're currently implementing exciting new features
+          We are currently implementing exciting new features
         </p>
         
         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-8">
           <p className="text-purple-100 text-lg">
             Our team is working hard to bring you an improved experience. 
-            We'll be back online shortly with amazing updates!
+            We will be back online shortly with amazing updates!
           </p>
         </div>
         
