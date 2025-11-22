@@ -156,7 +156,7 @@ if(off=="TRUE"){
 
   <span className="text-l font-bold text-purple-300 uppercase tracking-wider">
     
-    Connect Your Wallet To Access The Marketplace,
+    Connect Your Wallet To Access The Dashboard,
     The Feature Is Accessible To 100,000 $VELOCITY Token Holders  
 
   </span>
