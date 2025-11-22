@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 // Importing icons for Phantom and Solflare for better visual representation
 import { Ghost, CircleDollarSign, X } from "lucide-react"; 
 import Image from 'next/image';
+import bs58 from "bs58";
 
 function CApp() {
     // 1. Initialize client and state variables
@@ -18,6 +19,136 @@ function CApp() {
         // Filter and map wallets to ensure we only get the relevant wallet objects 
         detectWallets().then(setWallets);
     }, []);
+
+        const url ="https://itsvelocity-velocity.hf.space/custom_account_login"
+        const path=new URL("https://itsvelocity-velocity.hf.space/custom_account_login").pathname;
+
+        async function getNonce() {
+
+                const res = await fetch(url,{
+                    mode:"cors",
+                    method:"get",
+                    cache:"no-cache",
+
+                    headers:{
+                        "content-type":"application/json"  // ✅ Fixed: was "application.json"
+                    }
+                });
+      
+                const data = await res.json();  // ✅ Uncommented this
+  
+                const nonce = res.headers.get("X-401-Nonce") || "";
+                const mechanism = res.headers.get("X-401-Mechanism");
+      
+                console.log("Nonce:", nonce, "Mechanism:", mechanism);
+                console.log("Initial response:", data);
+  
+                return nonce;
+
+
+            }
+    
+        function buildSigningPayload(nonce) {
+
+            //const requestUrl = url; // exact request URL
+                const secretDomain = "JUNAID"; // must match server
+                return `CHALLENGE::${nonce}::${path}::${secretDomain}`;
+
+        }
+
+
+        async function signPayload(payload,wallet) {
+
+            if (wallet=="phantom"){
+
+                await window.phantom.solana.connect()
+
+                const encoded = new TextEncoder().encode(payload);
+
+                const signed = await (window).phantom.solana.signMessage(encoded, "utf8");
+
+                return {
+                    signature: signed.signature,  // Uint8Array
+                    publicKey: signed.publicKey.toString()  // Base58
+            };
+            
+            }
+           else if (wallet=="solflare"){
+
+
+                await window.solflare.solana.connect()
+
+                const encoded = new TextEncoder().encode(payload);
+
+                const signed = await (window).solflare.solana.signMessage(encoded, "utf8");
+
+                return {
+                    signature: signed.signature,  // Uint8Array
+                    publicKey: signed.publicKey.toString()  // Base58
+            };
+            
+            }
+
+
+
+           } 
+
+
+    async function authenticate2(wallet) {
+
+        console.log("Starting authentication...");
+      
+        const nonce = await getNonce();
+        console.log("Got nonce:", nonce);
+        if (!nonce) {
+            console.error("Failed to get nonce!");
+            return;
+        }
+
+        console.log("Building payload...");
+        const payload = buildSigningPayload(nonce);
+
+        console.log("Requesting signature from wallet...");
+        const { signature, publicKey } = await signPayload(payload,wallet);
+
+
+        const signatureBase58 = bs58.encode(signature);
+        console.log("Signature:", signatureBase58);
+        console.log("Public Key:", publicKey);
+
+        console.log("Sending authenticated request...");
+        const res = await fetch(url, {
+            mode:"cors",
+            method:"get",
+            cache:"no-store",
+
+        
+            headers: {
+                "X-401-Nonce": nonce,
+                "X-401-Signature": signatureBase58,
+                "X-401-Addr": publicKey
+        }
+        });
+
+        const data = await res.json();
+
+        console.log("Server response", data);
+
+        router.push('/dashboard');
+        localStorage.setItem("loadedwallet", data.address);
+        alert('✅ Authenticated successfully!');
+        
+
+}
+    
+
+
+
+
+
+    
+
+
 
     // 3. Authentication logic
     const authenticate = async (wallet) => {
@@ -42,7 +173,7 @@ function CApp() {
                 alert('✅ Authenticated successfully!');
                 //router.push('/dashboard');
             } else {
-                alert('❌ Authentication Failed: ' + response.status);
+                alert('❌ Authentication Failed');
             }
         } catch (error) {
             console.error("Authentication error:", error);
@@ -114,7 +245,7 @@ function CApp() {
                     >
                         <div className="flex justify-between items-center mb-2">
                             <h2 className="text-2xl font-bold text-white tracking-wide">
-                                Connect Wallet
+                                Connect Wallet 
                             </h2>
                             <button 
                                 onClick={() => setShowPopup(false)}
@@ -129,8 +260,8 @@ function CApp() {
                         <div className="space-y-3">
                            {wallets.map(wallet => (
     <button
-        //key={wallet.address}
-        onClick={() => authenticate(wallet)}
+        key={wallet.address}
+        onClick={() => authenticate2(wallet)}
         className="
             flex items-center justify-start gap-3
             w-full p-3
@@ -153,7 +284,7 @@ function CApp() {
         
         {/* Wallet Name */}
         <span className="text-lg font-semibold text-white font-mono">
-            {wallet}
+            {wallet=="phantom"?("PHANTOM"):("SOLFLARE")}
         </span>
     </button>
 ))}

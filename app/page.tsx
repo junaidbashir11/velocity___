@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Link, Zap, RefreshCw, ArrowRight, Sparkles ,GithubIcon,TwitterIcon} from "lucide-react";
+import { Link, Zap, RefreshCw, ArrowRight, Sparkles ,GithubIcon,TwitterIcon,Martini} from "lucide-react";
 import Roadmap from '@/lib/roadmap';
 import CApp from '@/lib/x403login';
 import { useEffect ,useState} from "react";
@@ -33,7 +33,14 @@ const features = [
   {
     name: "One Time Endpoints",
     description: "Pay once for x402 powered endpoint for recurring customers (coming soon)",
-    icon: Zap,
+    icon: Sparkles,
+    gradient: "from-pink-500 to-rose-500"
+  },
+
+   {
+    name: "Marketplace",
+    description: "All regsitered endpoints are auto  hosted in the marketplace where you can find the  API service that you want to use",
+    icon: Martini,
     gradient: "from-pink-500 to-rose-500"
   },
 ];
@@ -142,6 +149,22 @@ if(off=="TRUE"){
 <div className="flex flex-col items-center justify-center">
 
   <p className='text-xl font-mono md:text-1xl text-gray-400 mb-10 max-w-3xl mx-auto font-light tracking-tight'>Instantly x402 , Dynamic x402 and MCP your API endpoints</p>
+
+
+
+<div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-full px-6 py-2 mb-8">
+
+  <span className="text-l font-bold text-purple-300 uppercase tracking-wider">
+    
+    Connect Your Wallet To Access The Marketplace,
+    The Feature Is Accessible To 100,000 $VELOCITY Token Holders  
+
+  </span>
+
+</div>
+
+
+
    <section>
           <CApp/>
   </section>
