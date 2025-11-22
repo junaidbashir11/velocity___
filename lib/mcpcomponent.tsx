@@ -36,7 +36,7 @@ export default function MCP() {
 
          <div className="bg-[#111827] border border-[#1e293b] rounded-lg p-3 font-mono text-sm text-green-400 mb-6">
             <i>Run on premesis</i><br />
-            <i>First : git clone https://github.com/x402VELOCITY/velocitymcpsetup.git</i> <br />
+            <i>First : git clone https://github.com/VELOCITYINFRA/velocitymcpsetup.git</i> <br />
             <i>Second : cd velocitymcpsetup</i> <br />
             <i>Third : npm install </i><br />
             <i>Finally : node index.js </i><br />
