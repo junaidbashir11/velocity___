@@ -18,6 +18,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "VELOCITY",
   description: "VELOCITY",
+  openGraph: {
+    title: "VELOCITY",
+    description: "The official VELOCITY project page.",
+    url: "xvelocity.dev",
+    
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
