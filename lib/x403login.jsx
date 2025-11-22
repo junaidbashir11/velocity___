@@ -132,14 +132,14 @@ function CApp() {
 
         const data = await res.json();
         if(res.status==500){
-            alert("Failed , You are not allowed")
+            alert("Auth Failed , You need 100000 tokens to access the platform")
         }
         else {
 
         console.log("Server response", data);
 
         router.push('/dashboard');
-        localStorage.setItem("loadedwallet", data.address);
+        localStorage.setItem("loadedwallet", data.address)
         alert('✅ Authenticated successfully!');
 
 
