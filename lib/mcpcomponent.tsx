@@ -57,7 +57,7 @@ export default function MCP() {
              Velocity Hosted MCP Endpoint: <br />
 
             <span className="font-mono bg-[#111827] border border-[#1e293b] rounded px-2 py-1 text-green-400">
-              https://mcpv100-production.up.railway.app/mcp
+              https://velocitymcpproduction.up.railway.app/mcp
             </span>
             <br />
             This endpoint can be directly used in <span className="text-purple-400 font-semibold">Claude Desktop</span> 

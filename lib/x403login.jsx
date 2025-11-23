@@ -218,15 +218,15 @@ function CApp() {
                 <button
                     onClick={() => setShowPopup(true)}
                     className="
-                        px-10 py-3
-                        text-lg font-bold 
+                        px-10 py-1
+                        text-lg font-bold
                         uppercase tracking-widest 
                         rounded-lg 
                         transition duration-300 ease-in-out
-                        // Transparent/Frosted Glass Effect
+                        
                         bg-white/10 backdrop-blur-md 
                         border border-purple-500/50
-                        // Velocity Theme Colors
+            
                         text-white 
                         shadow-[0_0_15px_rgba(168,85,247,0.7)] 
                         hover:bg-white/20 hover:border-fuchsia-500/70

@@ -134,24 +134,60 @@ if(off=="TRUE"){
             transition={{ duration: 0.8 }}
             className="text-center mb-1"
           >
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-full px-6 py-2 mb-8">
-              <Sparkles className="w-4 h-4 text-purple-400" />
-              <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">X402 Protocol (Entirely Open Source)</span>
-            </div>
 
-            <h1 className="text-7xl md:text-9xl font-black tracking-tighter mb-8 leading-none">
+               <h1 className="text-6xl md:text-9xl font-black tracking-tighter mb-8 leading-none">
               <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
                 VELOCITY
               </span>         
             </h1>
-           
 
+
+            <div className="inline-flex items-center gap-2  rounded-full px-6 py-2 mb-8">
+          
+              <span className="text-sm font-bold text-purple-300 uppercase tracking-wider">
+                
+              x402 protocol with Dynamic x402,MCP-enabled & Seamless Endpoint Registrations ( Entirely Open Source) <br/>
+              x401 Protocol to make Wallet Authentication Seamless And Easy ( Entirely Open Source)
+            
+              </span>
+            </div>
+
+           
+        
 <div className="flex flex-col items-center justify-center">
 
-  <p className='text-xl font-mono md:text-1xl text-gray-400 mb-10 max-w-3xl mx-auto font-light tracking-tight'>Instantly x402 , Dynamic x402 and MCP your API endpoints</p>
 
 
 
+<div className="inline-flex flex-col items-start gap-3 rounded-xl bg-purple-900/10 p-6 mb-8 border border-purple-500/30">
+
+    <h2 className="text-xl font-bold font-sans text-purple-300 tracking-tight">
+        ✨ The Developer-First Web3 Toolkit
+    </h2>
+
+    <p className="text-base text-gray-200">
+        Unlock next-gen API connectivity and secure wallet authentication with a completely open-source solution.
+    </p>
+
+    <ul className="list-disc list-inside space-y-1 text-sm text-gray-300 ml-4">
+        <li>
+            **Dynamic Endpoint Registration:** Seamlessly connect and monetize APIs using our **Dynamic x402 & MCP-enabled** system.
+        </li>
+        <li>
+            **Private Wallet Authentication:** Secure user data with our **x401 Protocol**—authenticate wallets without leaking private information.
+        </li>
+    </ul>
+
+    <p className="text-sm font-semibold text-purple-400 mt-2">
+        Powered by our native token $VELOCITY and **100% Open Source**.
+    </p>
+
+</div>
+
+
+
+
+  
 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-full px-6 py-2 mb-8">
 
   <span className="text-l font-bold text-purple-300 uppercase tracking-wider">
@@ -216,7 +252,7 @@ if(off=="TRUE"){
               </span>
             </h2>
             <p className="text-center text-gray-400 mb-16 text-lg">
-              Instantly x402 , Dynamic x402 and MCP your API endpoints
+             
             </p>
 
           </motion.div>
