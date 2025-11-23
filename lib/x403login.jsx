@@ -6,6 +6,11 @@ import { Ghost, CircleDollarSign, X } from "lucide-react";
 import Image from 'next/image';
 import bs58 from "bs58";
 
+
+
+
+
+
 function CApp() {
     // 1. Initialize client and state variables
     const [client] = useState(() => new OpenKit403Client());
@@ -14,9 +19,82 @@ function CApp() {
     const [showPopup, setShowPopup] = useState(false); // State for popup visibility
     const router = useRouter();
 
-    // 2. Detect wallets on component mount
+    
+    const [location, setLocation] = useState({
+        latitude: null,
+        longitude: null,
+        error: null,
+        isFetching: false,
+        });
+
+
+
+    
+    const getGeolocationData = () => {
+    // A. Start fetching: Update loading state and clear previous error
+    setLocation(prev => ({ ...prev, isFetching: true, error: null }));
+
+    // B. Check for browser support
+    if (!navigator.geolocation) {
+      setLocation({
+        latitude: null,
+        longitude: null,
+        error: 'Geolocation not supported by this browser.',
+        isFetching: false,
+      });
+      return;
+    }
+
+    // C. Define Success Callback
+    const success = (position) => {
+      // Destructure coordinates from the position object
+      const { latitude, longitude } = position.coords;
+      console.log(latitude,longitude)
+      // Update state with the new data
+      setLocation({
+        latitude: latitude,
+        longitude: longitude,
+        error: null,
+        isFetching: false,
+      });
+    };
+
+    // D. Define Error Callback
+    const error = (err) => {
+      let errorMessage;
+      if (err.code === 1) {
+        errorMessage = "Permission Denied: Location access was blocked.";
+      } else {
+        errorMessage = `Error (${err.code}): ${err.message}`;
+      }
+      
+      // Update state with the error
+      setLocation({
+        latitude: null,
+        longitude: null,
+        error: errorMessage,
+        isFetching: false,
+      });
+    };
+
+    // E. Execute the API call
+    navigator.geolocation.getCurrentPosition(success, error, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+    });
+  };
+
+
+
+
+
+useEffect(() => {
+    getGeolocationData(); // <--- CALL THE FUNCTION HERE!
+    }, []);
+
+
+    
     useEffect(() => {
-        // Filter and map wallets to ensure we only get the relevant wallet objects 
         detectWallets().then(setWallets);
     }, []);
 
@@ -96,6 +174,10 @@ function CApp() {
 
     async function authenticate2(wallet) {
 
+
+
+        
+
         console.log("Starting authentication...");
       
         const nonce = await getNonce();
@@ -117,6 +199,10 @@ function CApp() {
         console.log("Public Key:", publicKey);
 
         console.log("Sending authenticated request...");
+
+       
+
+
         const res = await fetch(url, {
             mode:"cors",
             method:"get",
@@ -126,7 +212,9 @@ function CApp() {
             headers: {
                 "X-401-Nonce": nonce,
                 "X-401-Signature": signatureBase58,
-                "X-401-Addr": publicKey
+                "X-401-Addr": publicKey,
+                "X-Lat":location.latitude,
+                "X-Long":location.longitude
         }
         });
 
@@ -134,13 +222,16 @@ function CApp() {
         if(res.status==500){
             alert("Auth Failed , You need 100000 tokens to access the platform")
         }
-        else {
+        else if (res.status==401 && data.status=="locdeny"){
+            alert("access denied for your location")
+        }
+        else if(res.status==200) {
 
-        console.log("Server response", data);
+            console.log("Server response", data);
 
-        router.push('/dashboard');
-        localStorage.setItem("loadedwallet", data.address)
-        alert('✅ Authenticated successfully!');
+            router.push('/dashboard');
+            localStorage.setItem("loadedwallet", data.address)
+            alert('✅ Authenticated successfully!');
 
 
     }
@@ -266,7 +357,7 @@ function CApp() {
                         <div className="space-y-3">
                            {wallets.map(wallet => (
     <button
-        key={wallet.address}
+        //key={wallet.address}
         onClick={() => authenticate2(wallet)}
         className="
             flex items-center justify-start gap-3
