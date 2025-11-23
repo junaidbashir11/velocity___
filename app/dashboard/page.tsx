@@ -58,12 +58,14 @@ export default function DashboardPage() {
     if (wallet){
       setWallet(wallet)
     }
+    if (!wallet){
+      router.push("/")
+    
+  }
+ 
 
   },[])
 
-  if (wallet==""){
-    //router.push("/")
-  }
  
 
 
