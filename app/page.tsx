@@ -120,6 +120,17 @@ if(off=="TRUE"){
       <a href={process.env.NEXT_PUBLIC_TWITTER} className="text-gray-400 hover:text-white transition">
         <TwitterIcon className="w-8 h-8" />
       </a>
+
+      <a href="https://t.me/velocity_infra" className="text-gray-400 hover:text-white transition">
+        <Image
+         width={30}
+         height={30}
+         src="/telegram.svg"
+         alt=""
+         />
+      </a>
+
+
     </div>
   </div>
 </nav>
