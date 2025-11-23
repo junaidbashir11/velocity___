@@ -46,9 +46,25 @@ import MaintenancePage from "@/lib/underm";
 export default function DashboardPage() {
 
   //const { connected, publicKey } = useWallet();
-   //const router = useRouter();
+  const router = useRouter();
   const [off,setOff]=useState("")
    const [wallet,setWallet]=useState("");
+
+
+
+   useEffect(()=>{
+
+    const wallet=localStorage.getItem("loadedwallet")
+    if (wallet){
+      setWallet(wallet)
+    }
+
+  },[])
+
+  if (wallet==""){
+    router.push("/")
+  }
+ 
 
 
 
@@ -65,19 +81,7 @@ export default function DashboardPage() {
 
 
 
-    useEffect(()=>{
-
-    const wallet=localStorage.getItem("loadedwallet")
-    if (wallet){
-      setWallet(wallet)
-    }
-
-  },[])
-
-  if (wallet==""){
-    //router.push("/")
-  }
- 
+   
 
   if(off=="TRUE"){
     return (
