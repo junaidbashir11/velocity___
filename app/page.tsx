@@ -130,6 +130,19 @@ if(off=="TRUE"){
          />
       </a>
 
+       <a href="https://www.npmjs.com/~itsvelocity" className="text-gray-400 hover:text-white transition">
+        <Image
+         width={35}
+         height={35}
+         src="/npm.png"
+         alt=""
+         />
+      </a>
+
+
+     
+
+
 
     </div>
   </div>
