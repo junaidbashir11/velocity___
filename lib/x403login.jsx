@@ -219,7 +219,12 @@ useEffect(() => {
         });
 
         const data = await res.json();
-        if(res.status==500){
+
+        if(res.status==500 && data.status=="locerror"){
+            alert("Location Access Error")
+        }
+
+        else if(res.status==500){
             alert("Auth Failed , You need 100000 tokens to access the platform")
         }
         else if (res.status==401 && data.status=="locdeny"){
