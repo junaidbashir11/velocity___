@@ -118,7 +118,13 @@ if(off=="TRUE"){
 
       {/* Twitter */}
       <a href={process.env.NEXT_PUBLIC_TWITTER} className="text-gray-400 hover:text-white transition">
-        <TwitterIcon className="w-8 h-8" />
+
+      <Image
+        alt="x"
+        width={40}
+        height={40}
+        src="/x1.jpg"
+      />
       </a>
 
       <a href="https://t.me/velocity_infra" className="text-gray-400 hover:text-white transition">
@@ -139,11 +145,8 @@ if(off=="TRUE"){
          />
       </a>
 
-
-     
-
-
-
+   
+    
     </div>
   </div>
 </nav>
@@ -201,6 +204,42 @@ if(off=="TRUE"){
             **Private Wallet Authentication:** Secure user data with our **x401 Protocol**—authenticate wallets without leaking private information.
         </li>
     </ul>
+    <section>
+      <a href="https://velocityinfra-187442e4.mintlify.app/introduction" 
+   className="
+     inline-flex items-center 
+     bg-gray-800 
+     hover:bg-gray-700
+     text-white 
+     font-bold 
+     py-3 px-5 
+     rounded-lg 
+     transition duration-200 
+     shadow-md
+   ">
+    <span className="font-mono">
+      Docs
+    </span>
+</a>
+
+<a href="https://velocityinfra-187442e4.mintlify.app/essentials/x401examples" 
+   className="
+     inline-flex items-center 
+     bg-indigo-600 
+     hover:bg-indigo-500 
+     text-white 
+     font-bold 
+     py-3 px-5
+     rounded-lg 
+     transition duration-200 
+     shadow-md
+   ">
+    <span className="font-mono">
+      Examples
+    </span>
+</a>
+
+    </section>
 
     <p className="text-sm font-semibold text-purple-400 mt-2">
         Powered by our native token $VELOCITY and **100% Open Source**.
