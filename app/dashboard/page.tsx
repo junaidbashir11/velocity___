@@ -49,27 +49,35 @@ export default function DashboardPage() {
   const router = useRouter();
   const [off,setOff]=useState("")
    const [wallet,setWallet]=useState("");
-   const [access,setAccess]=useState("")
-   
+  
+ /*
    useEffect(()=>{
     const ui=window.prompt("id")||""
     setAccess(ui)
    },[])
 
+   */
    useEffect(()=>{
+
+
+
+    const ui=window.prompt("id","type in password")
 
     const wallet=localStorage.getItem("loadedwallet")
     if (wallet){
       setWallet(wallet)
     }
-    if (!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS=="YES" && access=="sahil123"){
+    if (!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS=="YES"){
 
-          return
+          if(ui=="sahil123"){
+            return 
+          }
+          else{
+            router.push("/")
+          }
     
     }
-    else if(!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS=="YES" && access!=="sahil123"){
-      router.push("/")
-    }
+   
     else if(!wallet){
         router.push("/")
     }
