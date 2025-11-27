@@ -49,11 +49,11 @@ export default function DashboardPage() {
   const router = useRouter();
   const [off,setOff]=useState("")
    const [wallet,setWallet]=useState("");
-
-   let access:any=null
+   const [access,setAccess]=useState("")
+   
    useEffect(()=>{
-    const ui=window.prompt("id")
-    access=ui
+    const ui=window.prompt("id")||""
+    setAccess(ui)
    })
 
    useEffect(()=>{
