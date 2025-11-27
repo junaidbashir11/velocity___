@@ -59,22 +59,13 @@ export default function DashboardPage() {
    */
    useEffect(()=>{
 
-
-
-    const ui=window.prompt("id","type in password")
-
     const wallet=localStorage.getItem("loadedwallet")
     if (wallet){
       setWallet(wallet)
     }
     if (!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS=="YES"){
 
-          if(ui=="sahil123"){
-            return 
-          }
-          else{
-            router.push("/")
-          }
+         return
     
     }
    
