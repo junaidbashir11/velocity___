@@ -54,7 +54,7 @@ export default function DashboardPage() {
    useEffect(()=>{
     const ui=window.prompt("id")||""
     setAccess(ui)
-   })
+   },[])
 
    useEffect(()=>{
 
