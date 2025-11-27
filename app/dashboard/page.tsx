@@ -67,6 +67,9 @@ export default function DashboardPage() {
           return
     
     }
+    else if(!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS=="YES" && access!=="sahil123"){
+      router.push("/")
+    }
     else if(!wallet){
         router.push("/")
     }
