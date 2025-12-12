@@ -324,7 +324,7 @@ export default function DynamicEndpointLinkerComponent() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">No Dynamic Endpoints Yet</h3>
               <p className="text-gray-400 text-sm max-w-md">
-                You haven't created any dynamic endpoints yet. Create one to get started!
+                You havent created any dynamic endpoints yet. Create one to get started!
               </p>
             </section>
           )}

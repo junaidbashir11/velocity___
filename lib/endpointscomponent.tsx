@@ -243,7 +243,7 @@ export default function EndpointLinkerComponent() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">No Endpoints Yet</h3>
               <p className="text-gray-400 text-sm max-w-md">
-                You haven't registered any endpoints yet. Create your first endpoint to get started!
+                You havent registered any endpoints yet. Create your first endpoint to get started!
               </p>
             </section>
           )}
