@@ -301,7 +301,7 @@ useEffect(() => {
              // Applying a deep, dark gradient background for the Velocity look
              style={{ 
                  background: '',
-                 minHeight: '90vh',
+                 minHeight: '10vh',
              }}>
 
             {/* --- CONNECT BUTTON OR STATUS DISPLAY --- */}

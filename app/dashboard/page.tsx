@@ -10,16 +10,14 @@ import {
   Code,
   LockOpen,
   Lock,
-  HomeIcon,
-  Martini
-  
+  Home,
+  Martini,
+  Icon
 } from "lucide-react";
-
 
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from "next/navigation";
-import { useEffect ,useState } from "react";
-
+import { useEffect, useState } from "react";
 
 import EndpointComponent from "@/lib/x402component";
 import EndpointLinkerComponent from "@/lib/endpointscomponent";
@@ -27,180 +25,177 @@ import DynamicEndpointLinkerComponent from "@/lib/dynamicendpointscomponent";
 import DynamicEndpointCreationComponent from "@/lib/createdynamicendpoints";
 import OnetimeComponent from "@/lib/onetimelinks";
 import Playground from "@/lib/playgroundcomponent";
+import SDKLogs from "@/lib/sdklogs";
 import Usage from "@/lib/usage";
 import Roadmap from "@/lib/roadmap";
 import X402Example from "@/lib/codecomponent";
 import MCP from "@/lib/mcpcomponent";
-
 import Marketplace from "@/lib/marketplace";
 import HomeComponent from "@/lib/homecomponent";
 import AuditComponent from "@/lib/audit";
 import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
 import MaintenancePage from "@/lib/underm";
-
-
-
-
+import X401 from "@/lib/x401";
 
 export default function DashboardPage() {
-
-  //const { connected, publicKey } = useWallet();
   const router = useRouter();
-  const [off,setOff]=useState("")
-   const [wallet,setWallet]=useState("");
-  
- /*
-   useEffect(()=>{
-    const ui=window.prompt("id")||""
-    setAccess(ui)
-   },[])
+  const [off, setOff] = useState("");
+  const [wallet, setWallet] = useState("");
 
-   */
-   useEffect(()=>{
-
-    const wallet=localStorage.getItem("loadedwallet")
-    if (wallet){
-      setWallet(wallet)
+  useEffect(() => {
+    const wallet = localStorage.getItem("loadedwallet");
+    if (wallet) {
+      setWallet(wallet);
     }
-    if (!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS=="YES"){
-
-         return
-    
+    if (!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS == "YES") {
+      return;
+    } else if (!wallet) {
+      router.push("/");
     }
-   
-    else if(!wallet){
-        router.push("/")
+  }, []);
+
+  useEffect(() => {
+    const offflag = process.env.NEXT_PUBLIC_OFF;
+    if (offflag == "TRUE") {
+      setOff("TRUE");
+    } else {
+      setOff("FALSE");
     }
+  }, []);
 
- 
-
-  },[])
-
- 
-
-
-
-  useEffect(()=>{
-    const offflag=process.env.NEXT_PUBLIC_OFF
-    if (offflag=='TRUE'){
-      setOff("TRUE")
-    }
-    else {
-      setOff("FALSE")
-    }
-
-},[])
-
-
-
-   
-
-  if(off=="TRUE"){
-    return (
-      <MaintenancePage/>
-    )
+  if (off == "TRUE") {
+    return <MaintenancePage />;
   }
-  
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-gray-300">
-      {/* Navbar */}
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 opacity-90"></div>
       
-      <main className="max-w-7xl mx-auto px-6 py-10">
+      {/* Overlay Pattern */}
+      <div className="absolute inset-0 bg-black/20"></div>
 
-        <Link href="/" className="text-[10px] text-gray-400 font-mono">Home</Link>
-            
-        {/* Tabs with Top Navigation */}
-        <Tabs defaultValue="home" className="w-full">
-          {/* Top-centered Tabs */}
-          <div className="flex justify-center">
-            <TabsList className="flex justify-center bg-slate-900/80 backdrop-blur-md border border-slate-700/40 rounded-2xl px-3 py-2 shadow-lg">
-              {[
+      {/* Custom Scrollbar Styles */}
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: linear-gradient(to right, #06b6d4, #8b5cf6);
+          border-radius: 10px;
+          transition: all 0.3s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(to right, #0891b2, #7c3aed);
+        }
+      `}</style>
 
-                {value:"home",label:"Home",icon:HomeIcon},
-                { value: "mcp", label: "MCP", icon: Globe },
-                { value: "usage", label: "Usage", icon: Globe },
-                {value:"marketplace",label:"Marketplace",icon:Martini},
-                { value: "x402ify", label: "Register Endpoints", icon: List },
-                { value: "endpoints", label: "Endpoints", icon: List },
-                { value: "register_dynamic", label: "Dynamic Register", icon: Zap },
-                { value: "dynamicendpoints", label: "Dynamic Endpoints", icon: RefreshCw },
-                { value: "paymenthistory", label: "PaymentHistory", icon: LockOpen },
-                //{ value: "playground", label: "Playground", icon: Play },
-              ].map((tab) => (
-                <TabsTrigger
-                  key={tab.value}
-                  value={tab.value}
-                  className="flex items-center gap-2 text-sm font-medium px-4 py-2 mx-1 rounded-xl 
-                  transition-all duration-300 
-                  text-gray-400 hover:text-white
-                  hover:bg-slate-800/60
-                  data-[state=active]:bg-gradient-to-r 
-                  data-[state=active]:from-indigo-600 
-                  data-[state=active]:to-red-600
-                  data-[state=active]:text-white
-                  data-[state=active]:shadow-md 
-                  data-[state=active]:shadow-indigo-600/30"
-                >
-                  <tab.icon className="w-4 h-4" />
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Header */}
+        <header className="px-8 py-6">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-md border border-white/30 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">V</span>
+              </div>
+              <h1 className="text-2xl font-bold text-white tracking-tight">
+                VELOCITY INFRA
+              </h1>
+            </div>
+            <Link 
+              href="/" 
+              className="text-white/80 hover:text-white transition-colors text-sm font-medium px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20"
+            >
+              Home
+            </Link>
           </div>
+        </header>
 
-          {/* Content Section */}
-          <div className="mt-10 bg-slate-900/60 backdrop-blur-md border border-slate-800/50 rounded-2xl shadow-xl p-8">
-           
-           
-            <TabsContent value="home">
-              <HomeComponent/>
-            </TabsContent>
-           
-           
-            <TabsContent value="mcp">
-              <MCP/>
-            </TabsContent>
+        <main className="max-w-7xl mx-auto px-8 py-12">
+          <Tabs defaultValue="home" className="w-full">
+            {/* Tab Navigation */}
+            <div className="flex justify-center mb-8 overflow-x-auto pb-2 custom-scrollbar">
+              <TabsList className="inline-flex justify-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl gap-1">
+                {[
+                  { value: "home", label: "Home", icon: Home },
+                  {value:"sdklogs",label:"Sdk Logs",icon:Code},
+                  { value: "mcp", label: "MCP", icon: Globe },
+                  {value:"auth",label:"X401",icon:Lock},
+                  { value: "x402ify", label: "Register Endpoints", icon: List },
+                  { value: "endpoints", label: "Endpoints", icon: List },
+                  { value: "register_dynamic", label: "Dynamic Register", icon: Zap },
+                  { value: "dynamicendpoints", label: "Dynamic Endpoints", icon: RefreshCw },
+                  { value: "paymenthistory", label: "Payments", icon: LockOpen },
+                ].map((tab) => (
+                  <TabsTrigger
+                    key={tab.value}
+                    value={tab.value}
+                    className="flex items-center gap-2 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2.5 rounded-xl 
+                    transition-all duration-300 whitespace-nowrap
+                    text-white/70 hover:text-white
+                    hover:bg-white/20
+                    data-[state=active]:bg-white
+                    data-[state=active]:text-purple-600
+                    data-[state=active]:shadow-lg 
+                    data-[state=active]:shadow-white/50
+                    data-[state=active]:scale-105"
+                  >
+                    <tab.icon className="w-4 h-4" />
+                    {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
 
-            <TabsContent value="usage">
-              <Usage />
-            </TabsContent>
+            {/* Content Area */}
+            <div className="bg-white/95 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-8 min-h-[600px]">
+              <TabsContent value="home">
+                <HomeComponent />
+              </TabsContent>
 
-             
-              <TabsContent value="marketplace">
-              <Marketplace/>
-            </TabsContent>
+               <TabsContent value="sdklogs">
+                <SDKLogs/>
+              </TabsContent>
 
-            <TabsContent value="x402ify">
-              <EndpointComponent />
-            </TabsContent>
+              <TabsContent value="mcp">
+                <MCP />
+              </TabsContent>
 
-            <TabsContent value="endpoints">
-              <EndpointLinkerComponent />
-            </TabsContent>
+             <TabsContent value="auth">
 
-            <TabsContent value="register_dynamic">
-              <DynamicEndpointCreationComponent />
-            </TabsContent>
+              <X401/>
 
-            <TabsContent value="dynamicendpoints">
-              <DynamicEndpointLinkerComponent />
-            </TabsContent>
+             </TabsContent>
+              
+              <TabsContent value="x402ify">
+                <EndpointComponent />
+              </TabsContent>
 
-            <TabsContent value="paymenthistory">
-              <AuditComponent/>
-            </TabsContent>
+              <TabsContent value="endpoints">
+                <EndpointLinkerComponent />
+              </TabsContent>
 
-           
+              <TabsContent value="register_dynamic">
+                <DynamicEndpointCreationComponent />
+              </TabsContent>
 
+              <TabsContent value="dynamicendpoints">
+                <DynamicEndpointLinkerComponent />
+              </TabsContent>
 
-            
-             
-            
-          </div>
-        </Tabs>
-      </main>
+              <TabsContent value="paymenthistory">
+                <AuditComponent />
+              </TabsContent>
+            </div>
+          </Tabs>
+        </main>
+      </div>
     </div>
   );
 }

@@ -1,28 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Network, Zap, FileText, Rocket, DollarSign } from "lucide-react";
-import { toast } from "sonner"
-import { Toaster } from "sonner"
+import { Network, Zap, FileText, Rocket, DollarSign, LogOut, Sparkles } from "lucide-react";
+import { toast } from "sonner";
+import { Toaster } from "sonner";
 import { useRouter } from 'next/navigation';
-
 
 export default function HomeComponent() {
   const [endpointCount, setEndpointCount] = useState<number>(0);
   const [dynamicCount, setDynamicCount] = useState<number>(0);
   const [invoiceCount, setInvoiceCount] = useState<number>(0);
-  const [wallet,setWallet]=useState("");
+  const [wallet, setWallet] = useState("");
   const router = useRouter();
 
-  //const { connected, publicKey } = useWallet();
-
-
-  const Logout=()=>{
-    localStorage.removeItem("loadedwallet")
-    toast.success(`cleared`)
+  const Logout = () => {
+    localStorage.removeItem("loadedwallet");
+    toast.success(`Logged out successfully`);
     router.push('/');
-  }
-
+  };
 
   async function checkEndpoints() {
     const res = await fetch("https://itsvelocity-velocity.hf.space/checkendpoints", {
@@ -50,7 +45,7 @@ export default function HomeComponent() {
     const res = await fetch("https://itsvelocity-velocity.hf.space/invoices", {
       mode: "cors",
       method: "post",
-      body: JSON.stringify({ owner: wallet}),
+      body: JSON.stringify({ owner: wallet }),
       headers: { "content-type": "application/json" },
     });
     const data = await res.json();
@@ -58,14 +53,12 @@ export default function HomeComponent() {
     setInvoiceCount(datasize);
   }
 
-   useEffect(()=>{
-
-    const wallet=localStorage.getItem("loadedwallet")
-    if (wallet){
-      setWallet(wallet)
+  useEffect(() => {
+    const wallet = localStorage.getItem("loadedwallet");
+    if (wallet) {
+      setWallet(wallet);
     }
-
-  },[])
+  }, []);
 
   useEffect(() => {
     if (wallet) {
@@ -76,114 +69,157 @@ export default function HomeComponent() {
   }, [wallet]);
 
   return (
-    <div className="px-10 py-10 text-gray-200 bg-gray-900 min-h-screen">
-      {/* Hero Section */}
+    <div className="relative text-white bg-gray-900/80 rounded-2xl p-8">
       <Toaster position="top-center" />
-      <div className="text-center mb-10">
-        
-        <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
-         
-                
-          </h1>
-          <h1 className="text-4xl md:text-4xl font-black tracking-tighter mb-5 leading-none">
-              <span className="block bg-gradient-to-br from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
-                Instantly x402, Dynamic x402 & MCP Your API Endpoints <pre></pre>
-                
-              </span>
-            </h1>
+      
+      {/* Hero Section */}
+      <div className="text-center mb-12">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-full border border-cyan-400/30 mb-6">
+          <Sparkles className="w-4 h-4 text-cyan-400" />
+          <span className="text-sm font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Web3 API Infrastructure
+          </span>
+        </div>
 
-        <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
-        <span className="text-xs text-gray-400 font-mono">
-              CA: {process.env.NEXT_PUBLIC_TOKEN} 
-        </span><br/>
+        <h1 className="text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight">
+          <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+            X401 WALLET AUTH,
+            x402 
+          </span>
+          <br />
+          <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+           Dynamic x402 & Auto MCP 
+          </span>
+        </h1>
+
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+          <span className="text-sm text-gray-300 font-mono">
+            CA: {process.env.NEXT_PUBLIC_TOKEN}
+          </span>
+        </div>
+
         <button
-        className="
-            flex items-center justify-start gap-3
-            w-full p-3
-            rounded-lg 
-            transition duration-200 
-            bg-gray-800/80 
-            border border-transparent
-            hover:bg-purple-600/30 
-            hover:border-fuchsia-500 
-            shadow-md
-            hover:scale-[1.02]
-        "
-        onClick={Logout}>Logout</button>
+          onClick={Logout}
+          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-red-500/50 transition-all duration-300 hover:scale-105"
+        >
+          <LogOut className="w-4 h-4" />
+          Logout
+        </button>
       </div>
 
       {/* Stats Grid */}
-      
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-        <div className="rounded-2xl border border-fuchsia-600/30 bg-white/5 backdrop-blur-sm p-6 flex items-center justify-between transition-all hover:border-fuchsia-500/50">
-          <div>
-            <h3 className="text-sm text-gray-400">Endpoints</h3>
-            <p className="text-3xl font-bold text-white">{endpointCount}</p>
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-fuchsia-500/10 to-purple-500/10 border border-fuchsia-500/30 p-6 hover:border-fuchsia-400 transition-all duration-300 hover:shadow-xl hover:shadow-fuchsia-500/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative flex items-center justify-between">
+            <div>
+              <h3 className="text-sm text-gray-300 mb-1 font-medium">Endpoints</h3>
+              <p className="text-4xl font-black bg-gradient-to-r from-fuchsia-400 to-purple-400 bg-clip-text text-transparent">
+                {endpointCount}
+              </p>
+            </div>
+            <div className="p-3 bg-fuchsia-500/20 rounded-xl">
+              <Network className="h-7 w-7 text-fuchsia-400" />
+            </div>
           </div>
-          <Network className="h-7 w-7 text-fuchsia-400" />
         </div>
 
-        <div className="rounded-2xl border border-cyan-600/30 bg-white/5 backdrop-blur-sm p-6 flex items-center justify-between transition-all hover:border-cyan-500/50">
-          <div>
-            <h3 className="text-sm text-gray-400">Dynamic Endpoints</h3>
-            <p className="text-3xl font-bold text-white">{dynamicCount}</p>
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 p-6 hover:border-cyan-400 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative flex items-center justify-between">
+            <div>
+              <h3 className="text-sm text-gray-300 mb-1 font-medium">Dynamic Endpoints</h3>
+              <p className="text-4xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                {dynamicCount}
+              </p>
+            </div>
+            <div className="p-3 bg-cyan-500/20 rounded-xl">
+              <Zap className="h-7 w-7 text-cyan-400" />
+            </div>
           </div>
-          <Zap className="h-7 w-7 text-cyan-400" />
         </div>
 
-        <div className="rounded-2xl border border-emerald-600/30 bg-white/5 backdrop-blur-sm p-6 flex items-center justify-between transition-all hover:border-emerald-500/50">
-          <div>
-            <h3 className="text-sm text-gray-400">Invoices</h3>
-            <p className="text-3xl font-bold text-white">{invoiceCount}</p>
+        <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/30 p-6 hover:border-emerald-400 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative flex items-center justify-between">
+            <div>
+              <h3 className="text-sm text-gray-300 mb-1 font-medium">Invoices</h3>
+              <p className="text-4xl font-black bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
+                {invoiceCount}
+              </p>
+            </div>
+            <div className="p-3 bg-emerald-500/20 rounded-xl">
+              <FileText className="h-7 w-7 text-emerald-400" />
+            </div>
           </div>
-          <FileText className="h-7 w-7 text-emerald-400" />
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Regular Endpoints */}
-        <div className="p-6 bg-gray-800/70 rounded-2xl border border-gray-700 transition hover:bg-gray-700">
-          <div className="flex items-center mb-4">
-            <Network className="h-6 w-6 text-fuchsia-400 mr-3" />
-            <h3 className="text-lg font-semibold text-white">Regular Endpoints </h3>
+        <div className="group relative overflow-hidden p-6 bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700 hover:border-fuchsia-400 transition-all duration-300 hover:shadow-xl hover:shadow-fuchsia-500/10">
+          <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative">
+            <div className="flex items-center mb-4">
+              <div className="p-2 bg-fuchsia-500/10 rounded-lg mr-3">
+                <Network className="h-6 w-6 text-fuchsia-500" />
+              </div>
+              <h3 className="text-lg font-bold text-white">Regular Endpoints</h3>
+            </div>
+            <p className="text-gray-300 leading-relaxed">
+              Standard API endpoints that maintain a fixed connection to your original API. Ideal for stable, unchanging services that need reliable acceleration.
+            </p>
           </div>
-          <p className="text-gray-300">
-            Standard API endpoints that maintain a fixed connection to your original API. Ideal for stable, unchanging services that need reliable acceleration.
-          </p>
         </div>
 
         {/* Dynamic Endpoints */}
-        <div className="p-6 bg-gray-800/70 rounded-2xl border border-gray-700 transition hover:bg-gray-700">
-          <div className="flex items-center mb-4">
-            <Zap className="h-6 w-6 text-cyan-400 mr-3" />
-            <h3 className="text-lg font-semibold text-white">Dynamic Endpoints </h3>
+        <div className="group relative overflow-hidden p-6 bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700 hover:border-cyan-400 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative">
+            <div className="flex items-center mb-4">
+              <div className="p-2 bg-cyan-500/10 rounded-lg mr-3">
+                <Zap className="h-6 w-6 text-cyan-500" />
+              </div>
+              <h3 className="text-lg font-bold text-white">Dynamic Endpoints</h3>
+            </div>
+            <p className="text-gray-300 leading-relaxed">
+              Flexible endpoints that let you update where they point to on the fly. Easily switch between APIs or services without creating new endpoints.
+            </p>
           </div>
-          <p className="text-gray-300">
-            Flexible endpoints that let you update where they point to on the fly. Easily switch between APIs or services without creating new endpoints.
-          </p>
         </div>
 
         {/* Auto MCP */}
-        <div className="p-6 bg-gray-800/70 rounded-2xl border border-gray-700 transition hover:bg-gray-700">
-          <div className="flex items-center mb-4">
-            <Rocket className="h-6 w-6 text-rose-400 mr-3" />
-            <h3 className="text-lg font-semibold text-white">Auto MCP </h3>
+        <div className="group relative overflow-hidden p-6 bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700 hover:border-rose-400 transition-all duration-300 hover:shadow-xl hover:shadow-rose-500/10">
+          <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative">
+            <div className="flex items-center mb-4">
+              <div className="p-2 bg-rose-500/10 rounded-lg mr-3">
+                <Rocket className="h-6 w-6 text-rose-500" />
+              </div>
+              <h3 className="text-lg font-bold text-white">Auto MCP</h3>
+            </div>
+            <p className="text-gray-300 leading-relaxed">
+              Automatically exposed as MCP endpoints for seamless integration with your infrastructure.
+            </p>
           </div>
-          <p className="text-gray-300">
-            Automatically exposed as  MCP endpoints
-          </p>
         </div>
 
         {/* Demand-based Pricing */}
-        <div className="p-6 bg-gray-800/70 rounded-2xl border border-gray-700 transition hover:bg-gray-700">
-          <div className="flex items-center mb-4">
-            <DollarSign className="h-6 w-6 text-emerald-400 mr-3" />
-            <h3 className="text-lg font-semibold text-white">On-Demand Pricing</h3>
+        <div className="group relative overflow-hidden p-6 bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-gray-700 hover:border-emerald-400 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10">
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="relative">
+            <div className="flex items-center mb-4">
+              <div className="p-2 bg-emerald-500/10 rounded-lg mr-3">
+                <DollarSign className="h-6 w-6 text-emerald-500" />
+              </div>
+              <h3 className="text-lg font-bold text-white">On-Demand Pricing</h3>
+            </div>
+            <p className="text-gray-300 leading-relaxed">
+              Update the price per request of your endpoints based on traffic and demand, making your API management cost-efficient.
+            </p>
           </div>
-          <p className="text-gray-300">
-            Update the price per request of your endpoints  based on traffic and demand, making your API management cost-efficient.
-          </p>
         </div>
       </div>
     </div>
