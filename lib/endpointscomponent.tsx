@@ -119,12 +119,12 @@ export default function EndpointLinkerComponent() {
   }, [wallet]);
 
   return (
-    <main className="w-full bg-gray-900/80 rounded-2xl p-8">
+    <main className="w-full rounded-2xl p-8">
       <div className="w-full">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-black text-white tracking-tight mb-2">
+            <h1 className="text-3xl font-black text-black tracking-tight mb-2">
               Your Endpoints
             </h1>
             <p className="text-gray-400 text-sm">
@@ -152,7 +152,7 @@ export default function EndpointLinkerComponent() {
               {endpoints.map((item, index) => (
                 <div
                   key={item.endpoint_linker}
-                  className="group relative overflow-hidden bg-gradient-to-br from-gray-900/90 to-gray-800/90 border border-gray-700 rounded-2xl p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10"
+                  className="group relative overflow-hidden   bg-gray-700   border border-gray-700 rounded-2xl p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10"
                 >
                   {/* Gradient Overlay on Hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>

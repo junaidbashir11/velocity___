@@ -37,6 +37,8 @@ import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
 import MaintenancePage from "@/lib/underm";
 import X401 from "@/lib/x401";
+import X401Agents from "@/lib/x401agents";
+import X401ZKP from "@/lib/x401zkproof";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -93,6 +95,10 @@ export default function DashboardPage() {
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(to right, #0891b2, #7c3aed);
         }
+           .custom-scrollbar {
+    flex-wrap: nowrap;
+  }
+    
       `}</style>
 
       {/* Content */}
@@ -120,13 +126,15 @@ export default function DashboardPage() {
         <main className="max-w-7xl mx-auto px-8 py-12">
           <Tabs defaultValue="home" className="w-full">
             {/* Tab Navigation */}
-            <div className="flex justify-center mb-8 overflow-x-auto pb-2 custom-scrollbar">
+            <div className="flex gap-4 mb-8 overflow-x-auto pb-2 custom-scrollbar px-4">
               <TabsList className="inline-flex justify-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-2 shadow-2xl gap-1">
                 {[
                   { value: "home", label: "Home", icon: Home },
                   {value:"sdklogs",label:"Sdk Logs",icon:Code},
                   { value: "mcp", label: "MCP", icon: Globe },
                   {value:"auth",label:"X401",icon:Lock},
+                  {value:"auth_agents",label:"X401agents",icon:Lock},
+                  {value:"auth_zkproof",label:"X401zkproof",icon:Lock},
                   { value: "x402ify", label: "Register Endpoints", icon: List },
                   { value: "endpoints", label: "Endpoints", icon: List },
                   { value: "register_dynamic", label: "Dynamic Register", icon: Zap },
@@ -152,7 +160,6 @@ export default function DashboardPage() {
                 ))}
               </TabsList>
             </div>
-
             {/* Content Area */}
             <div className="bg-white/95 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-8 min-h-[600px]">
               <TabsContent value="home">
@@ -170,6 +177,18 @@ export default function DashboardPage() {
              <TabsContent value="auth">
 
               <X401/>
+
+             </TabsContent>
+
+              <TabsContent value="auth_agents">
+
+              <X401Agents/>
+
+             </TabsContent>
+
+              <TabsContent value="auth_zkproof">
+
+              <X401ZKP/>
 
              </TabsContent>
               
