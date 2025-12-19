@@ -13,7 +13,7 @@ export default function StructuralGridRoadmap() {
       title: "Multi-Chain & Cross-System Expansion",
       description:`
       Multi-Chain Signature Mesh
-      Universal authentication and signature routing across zkSync, Ethereum L2s, Polygon, and ZK rollups.
+      Universal authentication and signature routing across multiple chains.
       Cross-Network Identity Federation
       A single agent or user identity that works across every supported chain.
       Unified Capability Graph
@@ -46,13 +46,12 @@ export default function StructuralGridRoadmap() {
       phase: "03",
       title: "The Autonomy Layer for Software",
       description:`
-      
 A world where AI agents operate independently but safely.
 Permissions and identity are enforced by math, not trust.
 APIs become composable building blocks in a global agent economy.
-Multi-chain identity is seamless and universal.
+Multi-chain identity is seamless , anonymous  and universal.
 Every action is verifiable and policy-bound.
-This infrastructure becomes the foundation for the next era of autonomous software, secure AI operations, and cryptographically enforced access control.`,
+`,
       icon: <Terminal className="w-8 h-8 text-white" />,
       status: "Vision",
     },
