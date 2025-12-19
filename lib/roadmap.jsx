@@ -1,135 +1,136 @@
-import { Clock, Package, CreditCard, Gift, Users } from "lucide-react"; 
+import React from "react";
+import { Activity, Terminal, Shield } from "lucide-react";
 
-// --- New Brutalist Utility Classes for Grid ---
-// Strong, dark card with bold white border, sharp corners
-const brutalGridCard = "bg-[#111111] border-2 border-white shadow-xl shadow-cyan-400/30"; 
-const brutalText = "text-white"; 
+// --- Clean, Spacious Utility Classes ---
+const roadmapSection = "relative py-16 md:py-24 border-b border-white/10 group";
+const bigTitle = "text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6";
+const bigDescription = "text-xl md:text-2xl text-gray-400 leading-relaxed font-light";
 
 export default function StructuralGridRoadmap() {
-  const roadmapItems = [
-    // --- ITEMS remain the same ---
-    {
-      title: "Token Incentives (Reward)",
-      description: (
-        <ul className="list-disc ml-6 space-y-1 text-sm">
-          <li>We believe in rewarding those who build the platform. **VELOCITY** is the exclusive reward mechanism for community contributions.</li>
-          <li>**Contributor Rewards:** Developers, technical writers, security researchers, and community managers who contribute high-quality, merged code or documentation will be rewarded with an allocation of **VELOCITY** tokens.</li>
-        </ul>
-      ),
-      icon: <Gift className="w-6 h-6 text-yellow-300" />,
-      iconBg: "bg-yellow-800",
-      status: "Planned",
-    },
-    {
-      title: "One-time Pay",
-      description: (
-        <ul className="list-disc ml-6 space-y-1 text-sm">
-          <li>Implement a single, upfront payment option for recurring or high-volume API clients.</li>
-          <li>Simplify the billing experience, reducing continuous small transactions.</li>
-          <li>Ensure a predictable and stable revenue stream for API providers.</li>
-        </ul>
-      ),
-      icon: <CreditCard className="w-6 h-6 text-fuchsia-300" />,
-      iconBg: "bg-fuchsia-800",
-      status: "Planned",
-    },
-    {
-      title: "Builtin Testing",
-      description: (
-        <ul className="list-disc ml-6 space-y-1 text-sm">
-          <li>Introduce a feature for automated, integrated testing of all public API endpoints.</li>
-          <li>Enable users to define comprehensive test cases for various inputs and expected outputs.</li>
-          <li>Run tests automatically upon deployment and on a scheduled basis for service consistency.</li>
-        </ul>
-      ),
-      icon: <Package className="w-6 h-6 text-purple-300" />,
-      iconBg: "bg-purple-800",
-      status: "Planned",
-    },
-    {
-      title: "Multi Token Support",
-      description: (
-        <ul className="list-disc ml-6 space-y-1 text-sm">
-          <li>Expand the platform to support monetization using a wider variety of popular cryptographic tokens.</li>
-          <li>Integrate several emerging blockchain assets alongside the currently supported tokens.</li>
-          <li>Offer greater flexibility in payment options to cater to a global, diverse user base.</li>
-        </ul>
-      ),
-      icon: <Clock className="w-6 h-6 text-sky-300" />,
-      iconBg: "bg-sky-800",
-      status: "Future",
-    },
-  ];
+  const roadmapItems = [
+    {
+      phase: "01",
+      title: "Multi-Chain & Cross-System Expansion",
+      description:`
+      Multi-Chain Signature Mesh
+      Universal authentication and signature routing across zkSync, Ethereum L2s, Polygon, and ZK rollups.
+      Cross-Network Identity Federation
+      A single agent or user identity that works across every supported chain.
+      Unified Capability Graph
+      All APIs, tools, and agent functions become globally discoverable.
+      Agents compose multi-chain capabilities with zero manual configuration. 
+      Enterprise Policy Modes
+      Compliance templates for healthcare, finance, and government workloads.
+      
+      `,
+      icon: <Activity className="w-8 h-8 text-white" />,
+      status: "In Progress",
+    },
+    {
+      phase: "02",
+      title: "Secure Compute & Verifying Pipelines",
+      description: `
+    Encrypted Compute Capsules
+    Isolated execution environments for sensitive agent operations.
+    Provenance tied directly to verified code artifacts.
+    Self-Attesting Pipelines
+    Every artifact (from build to deploy to execute) is cryptographically provable.
+    Deterministic Agent Actions
+    All agent behavior is reproducible and verifiable end-to-end.
+      
+      `,
+      icon: <Shield className="w-8 h-8 text-white" />,
+      status: "Planned",
+    },
+    {
+      phase: "03",
+      title: "The Autonomy Layer for Software",
+      description:`
+      
+A world where AI agents operate independently but safely.
+Permissions and identity are enforced by math, not trust.
+APIs become composable building blocks in a global agent economy.
+Multi-chain identity is seamless and universal.
+Every action is verifiable and policy-bound.
+This infrastructure becomes the foundation for the next era of autonomous software, secure AI operations, and cryptographically enforced access control.`,
+      icon: <Terminal className="w-8 h-8 text-white" />,
+      status: "Vision",
+    },
+  ];
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Planned":
-        return "text-green-300 bg-green-900 border-green-500 border"; 
-      case "Future":
-        return "text-gray-300 bg-gray-900 border-gray-500 border"; 
-      default:
-        return "text-gray-400 bg-gray-700/40 border-gray-600 border";
-    }
-  };
+  return (
+    <div className="bg-[#050505] min-h-screen text-white p-6 md:p-20 font-sans selection:bg-white selection:text-black">
+      
+      <div className="max-w-7xl mx-auto relative">
+        
+        {/* Header Section - Massive & Upright */}
+        <header className="mb-40">
+          <div className="flex items-center gap-6 mb-8 text-gray-500 font-mono text-sm tracking-[0.4em] uppercase">
+            <span>Core Protocol</span>
+            <div className="h-px flex-1 bg-white/10"></div>
+            <span>V.2025</span>
+          </div>
+          
+          <h1 className="text-[12vw] font-black leading-[0.85] uppercase tracking-tighter">
+            Velocity <br />
+            <span className="text-gray-600">Roadmap</span>
+          </h1>
+          
+          <p className="mt-12 max-w-2xl text-2xl text-gray-400 font-light leading-snug">
+            Architecting high-scale infrastructure for verifiable autonomous systems and secure AI operations.
+          </p>
+        </header>
 
-  return (
-    // Outer container remains backgroundless, using standard padding
-    <div className={`${brutalText} px-4 py-20 relative overflow-hidden flex justify-center`}>
-      
-      <div className="relative z-10 max-w-5xl w-full text-center">
-        {/* Header - Brutalist Font and Contrast */}
-        <div className="mb-16">
-          <h1 className="text-6xl md:text-7xl font-black mb-4 tracking-tighter">
-            <span className={`bg-gradient-to-r from-[#6200ff] to-[#00d4ff] bg-clip-text text-transparent`}>
-              VELOCITY ROADMAP
-            </span>
-          </h1>
-          <p className="text-gray-400 text-xl max-w-3xl mx-auto border-t border-b border-gray-600 py-3">
-            Structural goals for decentralized API infrastructure.
-          </p>
-        </div>
+        {/* Roadmap Sections - Huge & Subtle */}
+        <div className="flex flex-col">
+          {roadmapItems.map((item, idx) => (
+            <div key={idx} className={roadmapSection}>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                {/* Meta Info (Phase/Status) */}
+                <div className="lg:col-span-3">
+                  <div className="flex flex-col gap-2">
+                    <span className="font-mono text-lg text-white/30 tracking-widest uppercase">
+                      [{item.phase}]
+                    </span>
+                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase px-3 py-1 border border-white/20 w-fit">
+                      {item.status}
+                    </span>
+                  </div>
+                </div>
 
-        {/* NEW: Roadmap Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-          {roadmapItems.map((item, idx) => (
-            <div
-              key={idx}
-              className={`p-6 ${brutalGridCard} rounded-none transition-all duration-300`}
-            >
-              
-              {/* Title, Icon, and Status Block */}
-              <div className="flex items-start justify-between mb-4">
-                
-                {/* Title & Status */}
-                <div className="flex flex-col">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    {item.title}
-                  </h3>
-                  <span
-                    className={`inline-block px-2 py-0.5 text-xs font-mono font-semibold ${getStatusColor(
-                      item.status
-                    )}`}
-                  >
-                    STATUS: {item.status.toUpperCase()}
-                  </span>
-                </div>
-                
-                {/* Icon - Solid, square block */}
-                <div
-                  className={`w-12 h-12 ${item.iconBg} flex items-center justify-center rounded-none border-2 border-white`}
-                >
-                  {item.icon}
-                </div>
-              </div>
+                {/* Content Area */}
+                <div className="lg:col-span-7">
+                  <h3 className={bigTitle}>{item.title}</h3>
+                  <p className={bigDescription}>{item.description}</p>
+                </div>
 
-              {/* Description */}
-              <div className="text-gray-300 leading-relaxed mt-4">
-                {item.description}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+                {/* Icon - Minimalist */}
+                <div className="lg:col-span-2 flex lg:justify-end">
+                  <div className="p-4 border border-white/10 opacity-50">
+                    {item.icon}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Technical Footer */}
+        <footer className="mt-40 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 font-mono text-[10px] text-gray-600 uppercase tracking-[0.5em]">
+          <div className="flex flex-col gap-2">
+            <div>Status: Operational</div>
+            <div>Auth: Verified_Node_771</div>
+          </div>
+          <div className="flex gap-8">
+            <a href="#" className="text-white hover:opacity-50 transition-opacity">Whitepaper</a>
+            <a href="#" className="text-white hover:opacity-50 transition-opacity">Github</a>
+            <a href="#" className="text-white hover:opacity-50 transition-opacity">Network</a>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  );
 }

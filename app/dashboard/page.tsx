@@ -73,7 +73,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Animated Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 opacity-90"></div>
+      <div className="absolute inset-0 "></div>
       
       {/* Overlay Pattern */}
       <div className="absolute inset-0 bg-black/20"></div>
@@ -161,7 +161,7 @@ export default function DashboardPage() {
               </TabsList>
             </div>
             {/* Content Area */}
-            <div className="bg-white/95 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-8 min-h-[600px]">
+            <div className=" backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-8 min-h-[600px]">
               <TabsContent value="home">
                 <HomeComponent />
               </TabsContent>
