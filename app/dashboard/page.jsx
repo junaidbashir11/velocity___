@@ -39,23 +39,32 @@ import MaintenancePage from "@/lib/underm";
 import X401 from "@/lib/x401";
 import X401Agents from "@/lib/x401agents";
 import X401ZKP from "@/lib/x401zkproof";
+import { jwtDecode } from "jwt-decode";
+
 
 export default function DashboardPage() {
   const router = useRouter();
   const [off, setOff] = useState("");
-  const [wallet, setWallet] = useState("");
+  const [wallet, setWallet] = useState(null);
 
-  useEffect(() => {
-    const wallet = localStorage.getItem("loadedwallet");
-    if (wallet) {
-      setWallet(wallet);
+
+
+ useEffect(() => {
+    const token = localStorage.getItem("loadedwallet")
+    
+    if (!token) {
+      router.replace("/")
+      return
     }
-    if (!wallet && process.env.NEXT_PUBLIC_BACKDOOR_ACCESS == "YES") {
-      return;
-    } else if (!wallet) {
-      router.push("/");
+    else if(token){
+      const decoded = jwtDecode(token)
+      setWallet(decoded.sub)
     }
-  }, []);
+    
+  }, [])
+
+
+
 
   useEffect(() => {
     const offflag = process.env.NEXT_PUBLIC_OFF;

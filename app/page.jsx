@@ -10,6 +10,8 @@ import MaintenancePage from "@/lib/underm";
 import AgenticHero from "../lib/heroanimate";
 import FeaturesGrid from "../lib/featuresgrid";
 import ProtocolGrid from "../lib/protocolgrid";
+import { detectWallets, getGeolocationData, VelocityAuth } from "velocitytunedx401";
+import { useRouter } from "next/navigation";
 
 // --- Neo-Brutalist Utility Classes ---
 const brutalBg = "bg-[#000000]"; // Pure Black
@@ -29,7 +31,13 @@ const secondaryButtonClasses =
 
 
 export default function Home() {
+
   const [off,setOff]=useState("")
+  const [showPopup, setShowPopup] = useState(false);
+  const [wallets, setWallets] = useState([]);
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const router=useRouter();
+  const [token, setToken] = useState(null);
 
   useEffect(()=>{
     const offflag=process.env.NEXT_PUBLIC_OFF
@@ -40,6 +48,99 @@ export default function Home() {
       setOff("FALSE")
     }
   },[])
+
+
+
+ useEffect(() => {
+    setToken(localStorage.getItem("loadedwallet"));
+  }, []);
+
+
+ useEffect(() => {
+    const token = localStorage.getItem("loadedwallet")
+    if (!token) {
+      router.replace("/")
+      return
+    }
+    else if(token){
+
+      router.replace("/dashboard")
+
+    }}, [token])
+
+ useEffect(() => {
+        setWallets(detectWallets());
+        const getLoc = async () => {
+            const data = await getGeolocationData();
+            setLocation({ latitude: data.latitude, longitude: data.longitude });
+        };
+        getLoc();
+    }, []);
+
+
+  const RUN = async (wallet) => {
+
+        const config={
+            wallet:wallet,
+            required_mint:"3d4XyPWkUJzruF5c2qc1QfpLgsaNaDLMtTya1bWBpump",
+            mint_amount:"0.0",
+            geo_code:"false",
+            geo_code_locs:"",
+            coords:{
+              latitude:location.latitude,
+              longitude:location.longitude
+          }
+        }
+        const result = await VelocityAuth(config);
+         if(result.success){
+
+      if(result.alreadyAuthenticated) {
+        alert("already authenticated")
+        console.log(result.token)
+        router.replace("/dashboard")
+
+    }
+    else if(result.alreadyAuthenticated==false){
+        
+        console.log(result.token)
+        localStorage.setItem("loadedwallet",result.token)
+        alert("authenticated")
+        router.replace("/dashboard")
+    }
+
+
+    }
+    else{
+
+        switch(result.error){
+
+            case "INSUFFICIENT_TOKENS":
+
+                alert(`You need ${result.required} tokens to access`);
+                break;
+
+            case "LOCATION_DENIED":
+
+                alert("Access denied for your location");
+                break;
+
+            case "LOCATION_ERROR":
+                
+                alert("Location permission denied")
+                break;
+
+        }}}
+    const getWalletIcon = (walletName) => {
+        const icons = {
+        metamask: "",
+        phantom: "/plogo.png",
+        solflare:"/solflare.svg"
+      
+    };
+
+   return icons[walletName];
+}
+
 
   if(off=="TRUE"){
     return (
@@ -125,6 +226,59 @@ export default function Home() {
               </a>
             ))}
           </div>
+
+          
+               <div>
+
+            <button
+                onClick={() => setShowPopup(true)}
+                className="px-8 py-2 text-sm font-black uppercase tracking-[0.3em] bg-white text-black border border-white hover:bg-transparent hover:text-white transition duration-200 ease-in-out"
+            >
+                Connect Wallet
+            </button><br/>
+              {showPopup && (
+                <div 
+                    className="fixed inset-0 z-[100] bg-white flex items-center justify-center p-2 backdrop-blur-sm"
+                    onClick={() => setShowPopup(false)} 
+                >
+                    <div 
+                        className="bg-[#0A0A0A] border border-white/20 w-full max-w-sm shadow-2xl"
+                        onClick={(e) => e.stopPropagation()} // Prevents clicking the modal body from closing it
+                    >
+                        <div className="flex justify-between items-center p-4 border-b border-white/10">
+                            <h2 className="text-sm font-bold text-white uppercase tracking-widest">Connect Wallet</h2>
+                            <button onClick={() => setShowPopup(false)} className="text-gray-400 hover:text-white">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="square" strokeLinejoin="square" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
+                        </div>
+                        
+                        <div className="p-2 space-y-1">
+                            {wallets.map((wallet, index) => (
+                                <button
+                                    key={wallet.address || index}
+                                    onClick={()=>RUN(wallet)}
+                                    className="flex items-center justify-start gap-4 w-full p-3 bg-white/5 border border-transparent hover:bg-white hover:text-black transition duration-150 group"
+                                >
+                                <img 
+                                    src={getWalletIcon(wallet)} 
+                                    alt="icon"
+                                    className="w-6 h-6 group-hover:invert transition-all"
+                                    />
+                                <span className="text-sm font-bold font-mono uppercase">
+                                        {wallet == "phantom" ? "PHANTOM" : "SOLFLARE"}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {wallets.length === 0 && (
+                            <p className="text-center text-[10px] text-gray-500 uppercase tracking-widest py-6 border-t border-white/5">No wallets detected.</p>
+                        )}
+                    </div>
+                </div>
+            )}
+            </div>
+
         </div>
       </div>
     </nav>
@@ -145,13 +299,16 @@ export default function Home() {
 
             {/* Primary CTAs (Original Links) */}
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-             
-              <a href="https://github.com/VELOCITYINFRA" 
-                className={secondaryButtonClasses}
-              >
-                GITHUB REPO
-              </a>
+
+
+              
             </div>
+
+
+
+           
+
+
 
         {/* Dashboard Gate & Login (Original Text) */}
    
